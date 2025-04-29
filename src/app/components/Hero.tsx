@@ -90,11 +90,14 @@ const Hero = () => {
               style={{
                 height: 'fit-content',
                 transformStyle: 'preserve-3d',
-                perspective: '800px'
+                perspective: '1000px',
+                backfaceVisibility: 'hidden',
+                willChange: 'transform',
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 sm:w-6 sm:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>
-              Contact me
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 sm:w-6 sm:h-6" style={{ transform: 'translateZ(5px)' }}><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>
+              <span style={{ transform: 'translateZ(5px)' }}>Contact me</span>
             </a>
           </div>
         </div>
