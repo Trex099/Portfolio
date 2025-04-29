@@ -12,6 +12,19 @@ export default function Home() {
   const mainRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    // Check if we have a hash in the URL for scrolling
+    if (window.location.hash === '#projects') {
+      // Give a brief moment for the page to render
+      setTimeout(() => {
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+          projectsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
+
+  useEffect(() => {
     // Ensure mainRef.current exists
     if (!mainRef.current) return;
     
@@ -57,6 +70,38 @@ export default function Home() {
     // Cleanup
     return () => {
       tl.kill();
+    };
+  }, []);
+
+  useEffect(() => {
+    // For fixing hover animations on load
+    const initializeHoverEffects = () => {
+      // Give time for everything to be rendered
+      setTimeout(() => {
+        const projectCards = document.querySelectorAll('.project-card');
+        if (projectCards.length) {
+          console.log('Initializing hover effects for', projectCards.length, 'project cards');
+          // Trigger a fake mouseleave to ensure initial state is correct
+          projectCards.forEach(card => {
+            const leaveEvent = new MouseEvent('mouseleave', {
+              view: window,
+              bubbles: true,
+              cancelable: true
+            });
+            card.dispatchEvent(leaveEvent);
+          });
+        }
+      }, 500);
+    };
+
+    // Run initialization
+    initializeHoverEffects();
+
+    // Also initialize on hash change, which happens when returning from project page
+    window.addEventListener('hashchange', initializeHoverEffects);
+    
+    return () => {
+      window.removeEventListener('hashchange', initializeHoverEffects);
     };
   }, []);
 

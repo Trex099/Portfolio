@@ -20,7 +20,6 @@ export const metadata: Metadata = {
 
 import LenisProvider from "./LenisProvider";
 import Navbar from "./components/Navbar";
-import FloatingNav from "./components/FloatingNav";
 
 export default function RootLayout({
   children,
@@ -34,7 +33,6 @@ export default function RootLayout({
       >
         <LenisProvider>
           <Navbar />
-          <FloatingNav />
           {children}
         </LenisProvider>
       </body>
