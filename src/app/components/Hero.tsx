@@ -21,7 +21,13 @@ const Hero = () => {
             <span className="text-5xl md:text-7xl font-bold text-white drop-shadow-lg text-left" style={{minWidth: '0.1em'}}>
               DEVELOPER
             </span>
-            <a href="#contact" className="shine-hover ml-4 px-7 py-2 border border-white text-white rounded-full flex items-center gap-2 text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle" style={{height: 'fit-content'}}>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=arshgour16@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shine-hover ml-4 px-7 py-2 border border-white text-white rounded-full flex items-center gap-2 text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle"
+              style={{height: 'fit-content'}}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>
               Contact me
             </a>
