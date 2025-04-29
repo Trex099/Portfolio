@@ -1,4 +1,5 @@
 "use client";
+// Updated Navbar component with optimized animations and hover effects
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import "./NavbarHover.css";
