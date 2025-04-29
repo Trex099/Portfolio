@@ -40,8 +40,7 @@ const Experience = () => {
 
   useLayoutEffect(() => {
     if (ulRef.current && boxRef.current) {
-      const ulRect = ulRef.current.getBoundingClientRect();
-      // No longer using boxRect, boxHeight, or lineHeight
+      // No longer using boxRect, boxHeight, lineHeight, or ulRect
       // Logic preserved for future extensibility if needed
     }
   }, [tab]);
