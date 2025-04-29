@@ -29,15 +29,9 @@ const techStack = [
   { name: "Illustrator", icon: "/icons/illustrator.svg", url: "https://www.adobe.com/products/illustrator.html" },
 ];
 
-const PROJECT_TITLE = "Portfolio";
-
 const TechStack = () => (
   <section id="techstack" className="w-full flex flex-col items-center justify-center py-16 bg-transparent">
-    {/* Title Row: Project Title & Tech Stack */}
-    <div className="w-full max-w-4xl mx-auto flex flex-row items-center justify-between mb-6">
-      <h2 className="text-2xl font-bold text-white">{PROJECT_TITLE}</h2>
-      <h2 className="text-2xl font-bold text-white">Tech Stack</h2>
-    </div>
+    <h2 className="text-2xl font-bold text-white mb-6 w-full max-w-3xl mx-auto">Tech Stack</h2>
     <div className="w-full max-w-4xl mx-auto">
       <div className="flex flex-wrap gap-4 items-center" style={{columnGap: '28px', rowGap: '18px'}}>
         {techStack.map((tech) => (
