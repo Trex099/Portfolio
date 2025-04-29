@@ -7,17 +7,37 @@ const ParallaxBackground = () => {
   const starsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
+    let targetScrollY = window.scrollY;
+    let currentScrollY = window.scrollY;
+    let ticking = false;
+
+    const lerp = (start: number, end: number, amt: number) => (1 - amt) * start + amt * end;
+
+    const updateParallax = () => {
+      currentScrollY = lerp(currentScrollY, targetScrollY, 0.08); // Smooth interpolation
       // Move gradient slower (background effect)
       if (gradientRef.current) {
-        gradientRef.current.style.backgroundPosition = `center ${-scrollY * 0.15}px`;
+        gradientRef.current.style.backgroundPosition = `center ${-currentScrollY * 0.15}px`;
       }
       // Move stars faster (foreground effect)
       if (starsRef.current) {
-        starsRef.current.style.backgroundPosition = `center ${-scrollY * 0.35}px`;
+        starsRef.current.style.backgroundPosition = `center ${-currentScrollY * 0.35}px`;
+      }
+      if (Math.abs(currentScrollY - targetScrollY) > 0.2) {
+        requestAnimationFrame(updateParallax);
+      } else {
+        ticking = false;
       }
     };
+
+    const handleScroll = () => {
+      targetScrollY = window.scrollY;
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateParallax);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     // Set initial position
     handleScroll();
