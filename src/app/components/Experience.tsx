@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 
 const workExperience = [
   {
@@ -31,40 +31,18 @@ const studies = [
   },
 ];
 
-// TimelineLine: draws a vertical line from the top to just below the last avatar
-const TimelineLine = ({ itemCount }: { itemCount: number }) => {
-  const avatarBlock = 56; // px (avatar + margin)
-  const avatarSize = 48; // px
-  const height = itemCount > 0 ? (avatarBlock * (itemCount - 1) + avatarSize) : 0;
-  return (
-    <div
-      className="absolute left-6 top-0 w-0.5 bg-white z-0"
-      style={{ marginLeft: "-1px", height: `${height}px` }}
-    />
-  );
-};
 
 const Experience = () => {
   const [tab, setTab] = useState<'work' | 'studies'>('work');
   const boxRef = useRef<HTMLDivElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
-  const [boxHeight, setBoxHeight] = useState<number | null>(null);
-  const [lineHeight, setLineHeight] = useState<number | null>(null);
+
 
   useLayoutEffect(() => {
     if (ulRef.current && boxRef.current) {
       const ulRect = ulRef.current.getBoundingClientRect();
-      const boxRect = boxRef.current.getBoundingClientRect();
-      setBoxHeight(ulRect.height + 16); // 16px for padding below last item
-      
-      // Calculate line height based on number of items
-      const items = ulRef.current.getElementsByTagName('li');
-      if (items.length > 0) {
-        const avatarHeight = 48; // Height of each avatar
-        const marginBottom = 24; // Margin between items
-        const totalHeight = (items.length - 1) * marginBottom + avatarHeight; // Height from center of first to center of last
-        setLineHeight(totalHeight);
-      }
+      // No longer using boxRect, boxHeight, or lineHeight
+      // Logic preserved for future extensibility if needed
     }
   }, [tab]);
 
