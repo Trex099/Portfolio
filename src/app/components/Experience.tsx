@@ -26,7 +26,7 @@ const studies = [
   {
     company: "Nios (Open Schooling)",
     role: "Senior Secondary school",
-    date: "2025-present",
+    date: "April 2025-present",
     description: "",
   },
   {
@@ -38,7 +38,7 @@ const studies = [
   {
     company: "Seventh Day inter College School",
     role: "Secondary School Certificate",
-    date: "April 2009-2024",
+    date: "April 2009- May 2024",
     description: "",
   },
 ];
