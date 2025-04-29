@@ -15,9 +15,12 @@ const Navbar = () => {
   const router = useRouter();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [activeIdx, setActiveIdx] = useState<number>(0);
-  const linkRefs = useRef<(HTMLLIElement | null)[]>([]);
-  const underlineRef = useRef<HTMLDivElement | null>(null);
-  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
+  const listRef = useRef<HTMLUListElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const [pillStyle, setPillStyle] = useState({ 
+    width: 0, 
+    transform: 'translateX(0px)' 
+  });
 
   // Determine active link by current path
   useEffect(() => {
@@ -25,43 +28,88 @@ const Navbar = () => {
       const path = window.location.pathname;
       const idx = navLinks.findIndex(link => link.href === path);
       setActiveIdx(idx === -1 ? 0 : idx);
+      
+      // Immediately set pill position without delay
+      updatePillPosition(idx === -1 ? 0 : idx);
     }
   }, []);
 
-  // Move underline on hover or active
-  useEffect(() => {
-    const idx = hoveredIdx !== null ? hoveredIdx : activeIdx;
-    const el = linkRefs.current[idx];
-    if (el) {
-      const { offsetLeft, offsetWidth } = el;
-      setUnderlineStyle({ left: offsetLeft, width: offsetWidth });
+  // Update pill position based on index - optimized for performance
+  const updatePillPosition = (idx: number) => {
+    // Cancel any pending animation frames
+    if (animationRef.current !== null) {
+      cancelAnimationFrame(animationRef.current);
     }
+    
+    // Use requestAnimationFrame for smoother animations
+    animationRef.current = requestAnimationFrame(() => {
+      if (listRef.current) {
+        const listItem = listRef.current.children[idx] as HTMLElement;
+        if (listItem) {
+          const width = listItem.offsetWidth;
+          const translateX = listItem.offsetLeft;
+          
+          setPillStyle({
+            width,
+            transform: `translateX(${translateX}px)`
+          });
+        }
+      }
+    });
+  };
+
+  // Cleanup animation frame on unmount
+  useEffect(() => {
+    return () => {
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, []);
+
+  // Move pill on hover or active change - with optimized event handling
+  useEffect(() => {
+    const targetIdx = hoveredIdx !== null ? hoveredIdx : activeIdx;
+    updatePillPosition(targetIdx);
   }, [hoveredIdx, activeIdx]);
+
+  // Handle mouse enter with debounce to prevent rapid firing
+  const handleMouseEnter = (idx: number) => {
+    setHoveredIdx(idx);
+  };
+
+  // Handle mouse leave
+  const handleMouseLeave = () => {
+    setHoveredIdx(null);
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-6 bg-transparent">
-      <div className="relative overflow-hidden rounded-full border border-white/20 bg-white/5 px-2 py-3 shadow backdrop-blur flex items-center" style={{height: '100%'}}>
-        {/* Animated pill background (now relative to navbar container) */}
-        <div
-          className={`navbar-pill${hoveredIdx !== null ? ' navbar-pill-visible' : ''}`}
+      <div className="relative rounded-full border border-white/20 bg-white/5 shadow backdrop-blur overflow-hidden">
+        {/* Moving pill element with will-change for performance */}
+        <div 
+          className={`pill-highlight ${hoveredIdx !== null ? 'pill-visible' : ''}`}
           style={{
-            left: underlineStyle.left,
-            width: underlineStyle.width,
-            height: '100%'
+            width: `${pillStyle.width}px`,
+            transform: pillStyle.transform,
           }}
         />
-        <ul className="navbar-list text-white/80 font-medium text-base w-full h-full">
+        
+        {/* Navigation links */}
+        <ul 
+          ref={listRef}
+          className="flex items-center"
+        >
           {navLinks.map((link, idx) => (
             <li
               key={link.href}
-              ref={el => { linkRefs.current[idx] = el; }}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              className="relative px-4 py-2 text-center h-full flex items-center justify-center"
+              className="px-3 py-2"
+              onMouseEnter={() => handleMouseEnter(idx)}
+              onMouseLeave={handleMouseLeave}
             >
               <Link
                 href={link.href}
-                className={`navbar-link transition-colors${activeIdx === idx ? " navbar-link-active" : ""}`}
+                className={`relative z-10 ${activeIdx === idx ? 'text-white' : 'text-white/70'}`}
                 prefetch={false}
               >
                 {link.name}

@@ -1,36 +1,65 @@
-.navbar-list {
-  position: relative;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.navbar-pill {
+/* Pill highlight effect */
+.pill-highlight {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  background: rgba(255,255,255,0.08);
+  background-color: rgba(255, 255, 255, 0.08);
   border-radius: 9999px;
-  transition: left 0.35s cubic-bezier(0.4,0,0.2,1), width 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
   z-index: 1;
   pointer-events: none;
   opacity: 0;
+  will-change: transform, width, opacity;
+  transition: 
+    transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+    width 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.1s ease;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.navbar-pill-visible {
+.pill-visible {
   opacity: 1;
 }
 
-.navbar-link {
-  position: relative;
-  z-index: 2;
-  display: block;
-  border-radius: 9999px;
-  transition: color 0.2s;
-  cursor: pointer;
+/* Navbar general styling */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  display: flex;
 }
 
-.navbar-link-active {
-  color: #fff !important;
+nav li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+  will-change: contents;
+}
+
+nav li:first-child {
+  padding-left: 4px;
+}
+
+nav li:last-child {
+  padding-right: 4px;
+}
+
+nav a {
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+  display: block;
+  padding: 0.25rem 0.25rem;
+  transform: translateZ(0);
+  will-change: color;
+}
+
+nav a:hover {
+  color: white;
 }

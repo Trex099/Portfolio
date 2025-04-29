@@ -1,23 +1,66 @@
-import React from "react";
+"use client";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import "./HeroShine.css";
 
 const Hero = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!heroRef.current) return;
+
+    const avatar = heroRef.current.querySelector('.avatar-container');
+    const name = heroRef.current.querySelector('.hero-name');
+    const location = heroRef.current.querySelector('.hero-location');
+    const title1 = heroRef.current.querySelector('.hero-title-1');
+    const title2 = heroRef.current.querySelector('.hero-title-2');
+    const socials = heroRef.current.querySelector('.socials-row');
+    const contactBtn = heroRef.current.querySelector('.contact-btn');
+
+    // Set initial states
+    gsap.set([avatar, name, location, title1, title2, socials, contactBtn], { 
+      y: 30, 
+      opacity: 0 
+    });
+
+    // Create timeline for entrance animation
+    const tl = gsap.timeline({ 
+      defaults: { 
+        ease: "power2.out",
+        duration: 0.6
+      } 
+    });
+
+    // Animate elements in sequence
+    tl.to(avatar, { y: 0, opacity: 1 })
+      .to(name, { y: 0, opacity: 1 }, "-=0.4")
+      .to(location, { y: 0, opacity: 1 }, "-=0.4")
+      .to(title1, { y: 0, opacity: 1, duration: 0.8 }, "-=0.3")
+      .to(title2, { y: 0, opacity: 1, duration: 0.8 }, "-=0.6")
+      .to(socials, { y: 0, opacity: 1 }, "-=0.4")
+      .to(contactBtn, { y: 0, opacity: 1 }, "-=0.3");
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   return (
-    <section id="home" className="flex flex-col items-center justify-center min-h-[60vh] pt-16 pb-8 text-center sm:pt-20 sm:pb-10">
-      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white/30 shadow-lg mb-4 sm:mb-6 bg-transparent flex items-center justify-center"></div>
-      <h2 className="text-base sm:text-lg font-semibold tracking-wide text-white/80">Arsh Gour</h2>
-      <p className="text-xs sm:text-sm text-white mb-1 sm:mb-2">🇮🇳 Based in India</p>
+    <section ref={heroRef} id="home" className="flex flex-col items-center justify-center min-h-[60vh] pt-16 pb-8 text-center sm:pt-20 sm:pb-10">
+      <div className="avatar-container w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white/30 shadow-lg mb-4 sm:mb-6 bg-transparent flex items-center justify-center"></div>
+      <h2 className="hero-name text-base sm:text-lg font-semibold tracking-wide text-white/80">Arsh Gour</h2>
+      <p className="hero-location text-xs sm:text-sm text-white mb-1 sm:mb-2">🇮🇳 Based in India</p>
       <div className="flex flex-col w-full items-center">
         <div className="w-full max-w-2xl sm:max-w-4xl flex flex-col items-center mb-6 sm:mb-8">
           <div className="w-full flex justify-center">
-            <span className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-lg text-center w-full leading-tight tracking-tight">FULLSTACK</span>
+            <span className="hero-title-1 text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-lg text-center w-full leading-tight tracking-tight">FULLSTACK</span>
           </div>
           <div className="w-full flex flex-col items-center justify-center mt-0">
-            <span className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-lg text-center" style={{minWidth: '0.1em'}}>
+            <span className="hero-title-2 text-3xl xs:text-4xl sm:text-5xl md:text-7xl font-bold text-white drop-shadow-lg text-center" style={{minWidth: '0.1em'}}>
               DEVELOPER
             </span>
             {/* Socials row directly under DEVELOPER */}
-            <div className="flex flex-row items-center justify-center gap-4 sm:gap-6 mt-3 mb-1 sm:mt-4 sm:mb-2">
+            <div className="socials-row flex flex-row items-center justify-center gap-4 sm:gap-6 mt-3 mb-1 sm:mt-4 sm:mb-2">
               <a href="#" className="shine-hover w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border-2 border-white">
                 {/* LinkedIn (Heroicons outline) */}
                 <svg fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5">
@@ -43,7 +86,7 @@ const Hero = () => {
               href="https://mail.google.com/mail/?view=cm&fs=1&to=arshgour16@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="shine-hover mt-1 sm:mt-2 px-5 py-2 sm:px-7 border border-white text-white rounded-full flex items-center gap-2 text-base sm:text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle"
+              className="contact-btn shine-hover mt-1 sm:mt-2 px-5 py-2 sm:px-7 border border-white text-white rounded-full flex items-center gap-2 text-base sm:text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle"
               style={{height: 'fit-content'}}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 sm:w-6 sm:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>

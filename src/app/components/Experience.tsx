@@ -1,22 +1,29 @@
 "use client";
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const workExperience = [
   {
-    company: "FrontEnd Web Developer",
-    role: "FrontEnd Web Developer",
+    company: "FrontEnd Web Developer (Private Company, Personal)",
+    role: "",
     date: "Jan 2021 - Present",
     description: "Web Design, Web Development, Wordpress, Dashboards, E-commerce.",
   },
   {
-    company: "BackEnd Developer (Private, Freelance)",
-    role: "BackEnd Developer (Private, Freelance)",
+    company: "BackEnd Developer (Private Company, Personal)",
+    role: "",
     date: "Aug 2020 - Present",
     description: "Database, Server-Side Logic, API Development, Authentication & Authorization, Performance Optimization, Security",
   },
   {
     company: "App Developer (Private Company, Personal Projects)",
-    role: "App Developer (Private Company, Personal Projects)",
+    role: "",
     date: "July 2020 - Present",
     description: "UI/UX Implementation, Feature Development, API Integration, State Management, Testing and Debugging, Performance Optimization, Publishing & Updates, Device Compatibility, Android and IOS.",
   },
@@ -48,14 +55,67 @@ const Experience = () => {
   const [tab, setTab] = useState<'work' | 'studies'>('work');
   const boxRef = useRef<HTMLDivElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
-
-  useLayoutEffect(() => {
-    if (ulRef.current && boxRef.current) {
-      // No longer using boxRect, boxHeight, lineHeight, or ulRect
-      // Logic preserved for future extensibility if needed
+  // Initialize all animations after component mounts 
+  useEffect(() => {
+    if (!ulRef.current || typeof window === "undefined") return;
+    
+    // Get all timeline items
+    const timelineItems = ulRef.current.querySelectorAll('li');
+    const title = document.querySelector('#experience h2');
+    const tabsContainer = document.querySelector('#experience .rounded-full');
+    
+    // Initial states
+    gsap.set(title, { y: 20, opacity: 0 });
+    gsap.set(tabsContainer, { y: 20, opacity: 0 });
+    gsap.set(timelineItems, { x: 20, opacity: 0 });
+    
+    // Create timeline for immediate animations without scroll dependency
+    const tl = gsap.timeline({
+      defaults: {
+        duration: 0.4,
+        ease: "power2.out"
+      }
+    });
+    
+    // Animate section title and tabs immediately
+    tl.to(title, { y: 0, opacity: 1 })
+      .to(tabsContainer, { y: 0, opacity: 1 }, "-=0.2");
+    
+    // Animate the first 3 items immediately with a short stagger
+    const visibleItems = Array.from(timelineItems).slice(0, 3);
+    tl.to(visibleItems, {
+      x: 0,
+      opacity: 1,
+      stagger: 0.08,
+      duration: 0.5
+    }, "-=0.1");
+    
+    // Only use ScrollTrigger for items that might be below the fold
+    if (timelineItems.length > 3) {
+      const belowFoldItems = Array.from(timelineItems).slice(3);
+      belowFoldItems.forEach((item, index) => {
+        gsap.to(item, {
+          x: 0,
+          opacity: 1,
+          duration: 0.4,
+          delay: 0.05 * index, // Reduced delay
+          scrollTrigger: {
+            trigger: item,
+            start: "top 90%", // Trigger earlier (higher in the viewport)
+            toggleActions: "play none none none"
+          }
+        });
+      });
     }
-  }, [tab]);
+    
+    return () => {
+      // Clean up all ScrollTriggers and timelines
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      tl.kill();
+    };
+  }, [tab]); // Re-run when tab changes
 
   return (
     <section id="experience" className="w-full flex flex-col items-center justify-center py-16 bg-transparent">
@@ -139,7 +199,10 @@ const Experience = () => {
                 <div>
                   <div className="text-white/60 text-xs mb-1">{item.date}</div>
                   <div className="font-semibold text-white">{item.company}</div>
-                  <div className="text-white/60 text-sm">{item.role}</div>
+                  {/* Only show role if it exists and we're in studies tab */}
+                  {tab === 'studies' && item.role && (
+                    <div className="text-white/60 text-sm">{item.role}</div>
+                  )}
                   <div className="text-white/80 text-sm mt-1">{item.description}</div>
                 </div>
               </li>
