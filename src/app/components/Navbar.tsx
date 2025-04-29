@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -6,16 +7,16 @@ const Navbar = () => {
       <div className="rounded-full border border-white/20 bg-white/5 px-10 py-3 shadow backdrop-blur flex">
         <ul className="flex gap-8 text-white/80 font-medium text-base">
           <li>
-            <a href="/" className="hover:text-white transition-colors">Home</a>
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
           </li>
           <li>
-            <a href="/about" className="hover:text-white transition-colors">About</a>
+            <Link href="/about" className="hover:text-white transition-colors">About</Link>
           </li>
           <li>
-            <a href="/projects" className="hover:text-white transition-colors">Projects</a>
+            <Link href="/projects" className="hover:text-white transition-colors">Projects</Link>
           </li>
           <li>
-            <a href="/contact" className="hover:text-white transition-colors">Contact</a>
+            <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
           </li>
         </ul>
       </div>
