@@ -9,5 +9,8 @@
   "github": {
     "enabled": true,
     "silent": false
-  }
+  },
+  "buildCommand": "npm run build",
+  "cleanUrls": true,
+  "ignoreCommand": "false"
 }
