@@ -24,10 +24,22 @@ const workExperience = [
 
 const studies = [
   {
-    company: "University of Porto",
-    role: "Bachelor in Computer Science",
-    date: "2016 - 2019",
-    description: "Relevant coursework: Algorithms, Data Structures, Web Development, Databases.",
+    company: "Nios (Open Schooling)",
+    role: "Senior Secondary school",
+    date: "2025-present",
+    description: "",
+  },
+  {
+    company: "Mount Litera School",
+    role: "Junior year",
+    date: "May 2024-April 2025",
+    description: "",
+  },
+  {
+    company: "Seventh Day inter College School",
+    role: "Secondary School Certificate",
+    date: "April 2009-2024",
+    description: "",
   },
 ];
 
