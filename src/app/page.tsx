@@ -17,7 +17,7 @@ export default function Home() {
         <Contact />
       </main>
       <footer className="w-full py-8 flex flex-col items-center text-xs text-white/40">
-        <span>© {new Date().getFullYear()} Rafael Amaral. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Arsh Gour. All rights reserved.</span>
       </footer>
     </div>
   );

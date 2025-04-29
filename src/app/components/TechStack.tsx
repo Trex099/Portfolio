@@ -31,8 +31,8 @@ const techStack = [
 
 const TechStack = () => (
   <section id="techstack" className="w-full flex flex-col items-center justify-center py-16 bg-transparent">
-    <h2 className="text-2xl font-bold text-white mb-6 w-full max-w-3xl mx-auto">Tech Stack</h2>
     <div className="w-full max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold text-white mb-6 text-left">Tech Stack</h2>
       <div className="flex flex-wrap gap-4 items-center" style={{columnGap: '28px', rowGap: '18px'}}>
         {techStack.map((tech) => (
           <a
