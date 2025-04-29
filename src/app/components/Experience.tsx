@@ -144,6 +144,15 @@ const Experience = () => {
       >
         {/* Timeline with connecting lines between circles */}
         <div className="relative" style={{paddingTop: '2px', paddingBottom: '2px'}}>
+          {/* Create a centered vertical line that spans the entire container */}
+          <div className="absolute bg-white" style={{
+            width: '1px',
+            left: '24px',
+            top: '36px', /* Start below first circle (12px [circle radius] + 24px [space to first circle]) */
+            bottom: '36px', /* End above last circle */
+            zIndex: 1
+          }}></div>
+          
           {/* Timeline entries */}
           <ul 
             ref={ulRef} 
@@ -157,24 +166,14 @@ const Experience = () => {
                 key={idx} 
                 className="flex items-start" 
                 style={{
-                  marginBottom: idx === arr.length - 1 ? '0' : '24px', /* Natural spacing exactly like reference */
+                  marginBottom: idx === arr.length - 1 ? '0' : '36px', /* Add more space between items for proper line display */
                   position: 'relative',
                   paddingLeft: '0'
                 }}
               >
-                {/* Avatar and connecting line */}
+                {/* Avatar circle and its container */}
                 <div style={{width: '48px', position: 'relative', display: 'flex', justifyContent: 'center', marginRight: '16px'}}>
-                  {/* Connecting line to previous circle (skip for first item) */}
-                  {idx > 0 && (
-                    <div className="bg-white absolute" style={{
-                      width: '1px',
-                      height: '24px', /* Match the margin-bottom of li */
-                      left: '24px',
-                      top: '-24px'
-                    }}></div>
-                  )}
-                  
-                  {/* Avatar circle */}
+                  {/* Avatar circle positioned exactly on the vertical line */}
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border-2 border-white overflow-hidden" style={{
                     zIndex: 2,
                     position: 'relative'
@@ -190,16 +189,6 @@ const Experience = () => {
                       <span className="text-lg font-bold text-gray-700">{item.company[0]}</span>
                     )}
                   </div>
-                  
-                  {/* Connecting line to next circle (skip for last item) */}
-                  {idx < arr.length - 1 && (
-                    <div className="bg-white absolute" style={{
-                      width: '1px',
-                      height: '24px', /* Match the margin-bottom of li */
-                      left: '24px',
-                      bottom: '-24px'
-                    }}></div>
-                  )}
                 </div>
                 
                 {/* Content */}
