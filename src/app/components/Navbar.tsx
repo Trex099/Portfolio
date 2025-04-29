@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import "./NavbarHover.css";
 
 const navLinks = [
@@ -12,7 +11,6 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const router = useRouter();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const listRef = useRef<HTMLUListElement>(null);
