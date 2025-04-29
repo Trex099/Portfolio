@@ -1,32 +1,34 @@
 .navbar-list {
   position: relative;
-  display: flex;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
 }
 
 .navbar-pill {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
   height: 100%;
   background: rgba(255,255,255,0.08);
   border-radius: 9999px;
-  transform: translateY(-50%);
-  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
   z-index: 1;
   pointer-events: none;
-  opacity: 1;
+  opacity: 0;
+  width: 25%;
 }
 
-.navbar-pill-hidden {
-  opacity: 0;
+.navbar-pill-visible {
+  opacity: 1;
 }
 
 .navbar-link {
   position: relative;
   z-index: 2;
   display: block;
-  padding: 0 0.25rem;
+  padding: 0.5rem 0;
+  text-align: center;
   border-radius: 9999px;
   transition: color 0.2s;
   cursor: pointer;
