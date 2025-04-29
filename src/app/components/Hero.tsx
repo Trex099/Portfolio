@@ -5,9 +5,7 @@ import "./HeroShine.css";
 const Hero = () => {
   return (
     <section id="home" className="flex flex-col items-center justify-center min-h-[60vh] pt-16 pb-8 text-center sm:pt-20 sm:pb-10">
-      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-white/30 shadow-lg mb-4 sm:mb-6">
-        <Image src="/profile.jpg" alt="Profile" width={96} height={96} className="object-cover w-full h-full" />
-      </div>
+      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-white/30 shadow-lg mb-4 sm:mb-6 bg-transparent flex items-center justify-center"></div>
       <h2 className="text-base sm:text-lg font-semibold tracking-wide text-white/80">Arsh Gour</h2>
       <p className="text-xs sm:text-sm text-white mb-1 sm:mb-2">🇮🇳 Based in India</p>
       <div className="flex flex-col w-full items-center">
