@@ -58,7 +58,6 @@ const Navbar = () => {
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               className="relative"
-              style={{ minWidth: '90px', textAlign: 'center' }}
             >
               <Link
                 href={link.href}
