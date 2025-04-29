@@ -1,0 +1,38 @@
+.shine-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine-hover::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  transition: left 0.6s cubic-bezier(0.4,0,0.2,1);
+  pointer-events: none;
+}
+
+.shine-hover:hover::before, .shine-hover:focus::before {
+  left: 120%;
+  transition: left 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.shine-hover {
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.shine-hover:hover, .shine-hover:focus {
+  transform: perspective(600px) rotateY(13deg) scale(1.04);
+}
+.shine-hover:active {
+  transform: perspective(600px) rotateY(0deg) scale(0.98);
+}
+
+
+.shine-hover:active::before {
+  left: 120%;
+  transition: none;
+}
