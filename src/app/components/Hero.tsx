@@ -57,13 +57,6 @@ const Hero = () => {
             </svg>
           </a>
           <a href="#" className="shine-hover w-14 h-14 flex items-center justify-center rounded-full border-2 border-white">
-            {/* Calendar (Heroicons outline) */}
-            <svg fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24" className="w-7 h-7">
-              <rect x="3" y="5" width="18" height="16" rx="2"/>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16 3v4M8 3v4m-5 4h18"/>
-            </svg>
-          </a>
-          <a href="#" className="shine-hover w-14 h-14 flex items-center justify-center rounded-full border-2 border-white">
             {/* Document (Heroicons outline) */}
             <svg fill="none" stroke="white" strokeWidth="2" viewBox="0 0 24 24" className="w-7 h-7">
               <path strokeLinecap="round" strokeLinejoin="round" d="M7 3h7l5 5v13a2 2 0 01-2 2H7a2 2 0 01-2-2V5a2 2 0 012-2z"/>
