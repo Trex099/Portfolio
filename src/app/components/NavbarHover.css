@@ -1,0 +1,28 @@
+.navbar-list {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-underline {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #fff 0%, #a3e635 100%);
+  border-radius: 2px;
+  transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+  z-index: 1;
+}
+
+.navbar-link {
+  position: relative;
+  z-index: 2;
+  padding: 0 0.25rem;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.navbar-link-active {
+  color: #fff !important;
+}
