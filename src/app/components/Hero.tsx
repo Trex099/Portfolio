@@ -87,7 +87,11 @@ const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="contact-btn shine-hover mt-1 sm:mt-2 px-5 py-2 sm:px-7 border border-white text-white rounded-full flex items-center gap-2 text-base sm:text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle"
-              style={{height: 'fit-content'}}
+              style={{
+                height: 'fit-content',
+                transformStyle: 'preserve-3d',
+                perspective: '800px'
+              }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 sm:w-6 sm:h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>
               Contact me

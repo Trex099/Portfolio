@@ -1,6 +1,8 @@
 .shine-hover {
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
 }
 
 .shine-hover::before {
@@ -21,18 +23,21 @@
   transition: left 0.6s cubic-bezier(0.4,0,0.2,1);
 }
 
-.shine-hover {
-  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-}
 .shine-hover:hover, .shine-hover:focus {
-  transform: perspective(600px) rotateY(13deg) scale(1.04);
+  transform: perspective(800px) rotateY(10deg) rotateX(2deg) scale(1.04);
 }
+
 .shine-hover:active {
   transform: perspective(600px) rotateY(0deg) scale(0.98);
 }
 
-
 .shine-hover:active::before {
   left: 120%;
   transition: none;
+}
+
+/* Special styling for the contact button */
+.contact-btn.shine-hover:hover {
+  transform: perspective(800px) rotateY(10deg) rotateX(2deg) scale(1.04);
+  background-color: rgba(255, 255, 255, 0.1);
 }
