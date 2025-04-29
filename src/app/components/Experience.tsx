@@ -150,8 +150,8 @@ const Experience = () => {
             style={{
               position: 'absolute',
               left: '24px',
-              top: -2,
-              bottom: -2,
+              top: 0,
+              bottom: 0,
               width: '1px', /* Thin white line matching reference */
               zIndex: 1
             }}
@@ -177,11 +177,18 @@ const Experience = () => {
               >
                 {/* Simple avatar circle positioned over the continuous line */}
                 <div style={{width: '48px', position: 'relative', display: 'flex', justifyContent: 'center', marginRight: '16px'}}>
+                  {/* White background cover to hide the line behind the circle */}
+                  <div className="absolute bg-black" style={{
+                    width: '20px',
+                    height: '100%',
+                    left: '14px',
+                    zIndex: 1
+                  }}></div>
+                  
                   {/* Avatar circle positioned exactly over the continuous line */}
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border-2 border-white overflow-hidden" style={{
                     zIndex: 2, 
-                    position: 'relative',
-                    transform: 'translateX(-1px)' /* Fine-tune to center exactly on the line */
+                    position: 'relative'
                   }}>
                     {/* Use logo if available, otherwise initial */}
                     {item.company === 'Digital Perspective' && (
