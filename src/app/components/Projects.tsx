@@ -8,6 +8,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// Project data - updated for demonstration
 const projects = [
   {
     name: "Project One",
