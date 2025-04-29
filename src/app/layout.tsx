@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 
 
 import LenisProvider from "./LenisProvider";
+import Navbar from "./components/Navbar";
 
 export default function RootLayout({
   children,
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LenisProvider>
+          <Navbar />
           {children}
         </LenisProvider>
       </body>
