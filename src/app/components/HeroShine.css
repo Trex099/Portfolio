@@ -36,10 +36,16 @@
   transition: none;
 }
 
-/* Enhanced tilt effect specifically for the contact button - left to right tilt */
-.contact-btn.shine-hover:hover {
-  transform: perspective(800px) rotateY(20deg) rotateX(3deg) scale(1.05);
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: -5px 10px 20px rgba(0, 0, 0, 0.25);
-  transform-origin: left center;
+/* Strong left-to-right tilt effect for contact button */
+a.contact-btn.shine-hover {
+  transform-style: preserve-3d !important;
+  transform-origin: left center !important;
+  transition: all 0.3s ease-out !important;
+}
+
+a.contact-btn.shine-hover:hover, 
+a.contact-btn.shine-hover:focus {
+  transform: perspective(800px) rotateY(25deg) rotateX(0deg) scale(1.05) !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: -8px 10px 20px rgba(0, 0, 0, 0.3) !important;
 }

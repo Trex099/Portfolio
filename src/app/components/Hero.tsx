@@ -5,6 +5,29 @@ import "./HeroShine.css";
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const contactBtnRef = useRef<HTMLAnchorElement>(null);
+
+  // Add tilt effect based on mouse position
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!contactBtnRef.current) return;
+    const btn = contactBtnRef.current;
+    const btnRect = btn.getBoundingClientRect();
+    
+    // Calculate mouse position relative to the button
+    const x = e.clientX - btnRect.left;
+    const y = e.clientY - btnRect.top;
+    
+    // Calculate rotation based on mouse position (stronger on Y-axis for left-right tilt)
+    const rotateY = 15 + (x / btnRect.width - 0.5) * 15; // 15 to 30 degrees
+    
+    // Apply the transform - stronger from left side
+    btn.style.transform = `perspective(800px) rotateY(${rotateY}deg) scale(1.05)`;
+  };
+  
+  const handleMouseLeave = () => {
+    if (!contactBtnRef.current) return;
+    contactBtnRef.current.style.transform = '';
+  };
 
   useEffect(() => {
     if (!heroRef.current) return;
@@ -83,6 +106,7 @@ const Hero = () => {
               </a>
             </div>
             <a
+              ref={contactBtnRef}
               href="https://mail.google.com/mail/?view=cm&fs=1&to=arshgour16@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
@@ -93,9 +117,11 @@ const Hero = () => {
                 perspective: '1000px',
                 backfaceVisibility: 'hidden',
                 willChange: 'transform',
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                transition: 'all 0.3s ease-out',
                 transformOrigin: 'left center'
               }}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-5 h-5 sm:w-6 sm:h-6" style={{ transform: 'translateZ(10px)' }}><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l18-7-7 18-2-7-7-2z" /></svg>
               <span style={{ transform: 'translateZ(10px)' }}>Contact me</span>
