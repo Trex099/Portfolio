@@ -142,21 +142,8 @@ const Experience = () => {
         ref={boxRef}
         className="w-full max-w-2xl mx-auto bg-black/40 border border-white/20 rounded-xl p-2 shadow-lg mt-2"
       >
-        {/* Timeline with single continuous line like reference image */}
+        {/* Timeline with connecting lines between circles */}
         <div className="relative" style={{paddingTop: '2px', paddingBottom: '2px'}}>
-          {/* Single continuous thin vertical line exactly like reference */}
-          <div 
-            className="absolute bg-white" 
-            style={{
-              position: 'absolute',
-              left: '24px',
-              top: 0,
-              bottom: 0,
-              width: '1px', /* Thin white line matching reference */
-              zIndex: 1
-            }}
-          ></div>
-          
           {/* Timeline entries */}
           <ul 
             ref={ulRef} 
@@ -175,19 +162,21 @@ const Experience = () => {
                   paddingLeft: '0'
                 }}
               >
-                {/* Simple avatar circle positioned over the continuous line */}
+                {/* Avatar and connecting line */}
                 <div style={{width: '48px', position: 'relative', display: 'flex', justifyContent: 'center', marginRight: '16px'}}>
-                  {/* White background cover to hide the line behind the circle */}
-                  <div className="absolute bg-black" style={{
-                    width: '20px',
-                    height: '100%',
-                    left: '14px',
-                    zIndex: 1
-                  }}></div>
+                  {/* Connecting line to previous circle (skip for first item) */}
+                  {idx > 0 && (
+                    <div className="bg-white absolute" style={{
+                      width: '1px',
+                      height: '24px', /* Match the margin-bottom of li */
+                      left: '24px',
+                      top: '-24px'
+                    }}></div>
+                  )}
                   
-                  {/* Avatar circle positioned exactly over the continuous line */}
+                  {/* Avatar circle */}
                   <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border-2 border-white overflow-hidden" style={{
-                    zIndex: 2, 
+                    zIndex: 2,
                     position: 'relative'
                   }}>
                     {/* Use logo if available, otherwise initial */}
@@ -201,7 +190,18 @@ const Experience = () => {
                       <span className="text-lg font-bold text-gray-700">{item.company[0]}</span>
                     )}
                   </div>
+                  
+                  {/* Connecting line to next circle (skip for last item) */}
+                  {idx < arr.length - 1 && (
+                    <div className="bg-white absolute" style={{
+                      width: '1px',
+                      height: '24px', /* Match the margin-bottom of li */
+                      left: '24px',
+                      bottom: '-24px'
+                    }}></div>
+                  )}
                 </div>
+                
                 {/* Content */}
                 <div>
                   <div className="text-white/60 text-xs mb-1">{item.date}</div>
