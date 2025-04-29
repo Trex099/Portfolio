@@ -19,9 +19,9 @@ const projects = [
 ];
 
 const Projects = () => (
-  <section id="projects" className="py-16 flex flex-col items-center justify-center w-full bg-transparent">
-    <h2 className="text-2xl font-bold text-white mb-8">Projects</h2>
-    <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl">
+  <section id="projects" className="py-16 flex flex-col items-start justify-center w-full bg-transparent">
+    <h2 className="text-2xl font-bold text-white mb-6 w-full max-w-3xl mx-auto text-left">Projects</h2>
+    <div className="grid md:grid-cols-3 gap-8 w-full max-w-5xl mx-auto">
       {projects.map((project, idx) => (
         <a
           key={idx}
