@@ -4,21 +4,30 @@
   gap: 2rem;
 }
 
-.navbar-underline {
+.navbar-pill {
   position: absolute;
+  top: 50%;
   left: 0;
-  bottom: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #fff 0%, #a3e635 100%);
-  border-radius: 2px;
+  height: 100%;
+  background: rgba(255,255,255,0.08);
+  border-radius: 9999px;
+  transform: translateY(-50%);
   transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
   z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+}
+
+.navbar-pill-hidden {
+  opacity: 0;
 }
 
 .navbar-link {
   position: relative;
   z-index: 2;
-  padding: 0 0.25rem;
+  display: block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 9999px;
   transition: color 0.2s;
   cursor: pointer;
 }

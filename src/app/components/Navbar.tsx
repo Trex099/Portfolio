@@ -42,11 +42,14 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full z-50 flex justify-center items-center py-6 bg-transparent">
       <div className="rounded-full border border-white/20 bg-white/5 px-10 py-3 shadow backdrop-blur flex">
         <ul className="navbar-list text-white/80 font-medium text-base relative">
-          {/* Animated underline */}
+          {/* Animated pill background */}
           <div
             ref={underlineRef}
-            className="navbar-underline"
-            style={{ left: underlineStyle.left, width: underlineStyle.width }}
+            className={`navbar-pill${hoveredIdx !== null || activeIdx !== null ? '' : ' navbar-pill-hidden'}`}
+            style={{
+              left: underlineStyle.left,
+              width: underlineStyle.width,
+            }}
           />
           {navLinks.map((link, idx) => (
             <li
@@ -55,10 +58,11 @@ const Navbar = () => {
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               className="relative"
+              style={{ minWidth: '90px', textAlign: 'center' }}
             >
               <Link
                 href={link.href}
-                className={`navbar-link transition-colors ${activeIdx === idx && hoveredIdx === null ? "navbar-link-active" : ""}`}
+                className={`navbar-link transition-colors${activeIdx === idx && hoveredIdx === null ? " navbar-link-active" : ""}`}
                 prefetch={false}
               >
                 {link.name}
