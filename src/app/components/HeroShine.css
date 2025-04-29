@@ -36,16 +36,21 @@
   transition: none;
 }
 
-/* Strong left-to-right tilt effect for contact button */
+/* Clean pop-out effect for contact button */
 a.contact-btn.shine-hover {
-  transform-style: preserve-3d !important;
-  transform-origin: left center !important;
-  transition: all 0.3s ease-out !important;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+  transform: scale(1) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
 }
 
 a.contact-btn.shine-hover:hover, 
 a.contact-btn.shine-hover:focus {
-  transform: perspective(800px) rotateY(25deg) rotateX(0deg) scale(1.05) !important;
+  transform: scale(1.08) !important;
   background-color: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: -8px 10px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+}
+
+a.contact-btn.shine-hover:active {
+  transform: scale(0.98) !important;
+  transition: all 0.1s ease-out !important;
 }
