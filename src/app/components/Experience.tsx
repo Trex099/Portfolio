@@ -56,6 +56,7 @@ const Experience = () => {
   const boxRef = useRef<HTMLDivElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
 
   // Initialize all animations after component mounts 
   useEffect(() => {
@@ -140,23 +141,29 @@ const Experience = () => {
       {/* Timeline/content box below */}
       <div
         ref={boxRef}
-        className="w-full max-w-2xl mx-auto bg-black/40 border border-white/20 rounded-xl p-2 shadow-lg mt-2"
+        className="w-full max-w-2xl mx-auto bg-black/40 border border-white/20 rounded-xl p-4 shadow-lg mt-2 relative"
       >
-        {/* Timeline with connecting lines between circles */}
-        <div className="relative" style={{paddingTop: '2px', paddingBottom: '2px'}}>
-          {/* Create a centered vertical line that spans the entire container */}
-          <div className="absolute bg-white" style={{
-            width: '1px',
-            left: '24px',
-            top: '36px', /* Start below first circle (12px [circle radius] + 24px [space to first circle]) */
-            bottom: '36px', /* End above last circle */
-            zIndex: 1
-          }}></div>
+        {/* Timeline container with line */}
+        <div 
+          ref={timelineRef}
+          className="relative"
+        >
+          {/* The vertical line that runs from top to bottom */}
+          <div 
+            className="absolute bg-white" 
+            style={{
+              width: '1px',
+              left: '24px',
+              top: '0',
+              bottom: '0',
+              height: '100%'
+            }}
+          ></div>
           
           {/* Timeline entries */}
           <ul 
             ref={ulRef} 
-            className="m-0 p-0" 
+            className="m-0 p-0 relative" 
             style={{
               listStyle: 'none'
             }}
@@ -166,18 +173,15 @@ const Experience = () => {
                 key={idx} 
                 className="flex items-start" 
                 style={{
-                  marginBottom: idx === arr.length - 1 ? '0' : '36px', /* Add more space between items for proper line display */
+                  marginBottom: idx === arr.length - 1 ? '0' : '36px',
                   position: 'relative',
                   paddingLeft: '0'
                 }}
               >
-                {/* Avatar circle and its container */}
-                <div style={{width: '48px', position: 'relative', display: 'flex', justifyContent: 'center', marginRight: '16px'}}>
-                  {/* Avatar circle positioned exactly on the vertical line */}
-                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border-2 border-white overflow-hidden" style={{
-                    zIndex: 2,
-                    position: 'relative'
-                  }}>
+                {/* Circle container */}
+                <div className="w-12 mr-4 flex justify-center relative">
+                  {/* White circle with initial */}
+                  <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center border-2 border-white overflow-hidden z-10 relative">
                     {/* Use logo if available, otherwise initial */}
                     {item.company === 'Digital Perspective' && (
                       <img src="/digitalperspective.svg" alt="Digital Perspective" className="w-10 h-10 object-contain" />
@@ -189,10 +193,13 @@ const Experience = () => {
                       <span className="text-lg font-bold text-gray-700">{item.company[0]}</span>
                     )}
                   </div>
+                  
+                  {/* White background to hide the line */}
+                  <div className="absolute bg-black/40 w-4 h-12 left-4 z-[1]"></div>
                 </div>
                 
                 {/* Content */}
-                <div>
+                <div className="flex-1">
                   <div className="text-white/60 text-xs mb-1">{item.date}</div>
                   <div className="font-semibold text-white">{item.company}</div>
                   {/* Only show role if it exists and we're in studies tab */}
@@ -203,6 +210,17 @@ const Experience = () => {
                 </div>
               </li>
             ))}
+            
+            {/* Extra element to ensure line extends to bottom */}
+            <div 
+              className="absolute bg-white" 
+              style={{
+                width: '1px',
+                left: '24px',
+                bottom: '-8px',
+                height: '8px'
+              }}
+            ></div>
           </ul>
         </div>
       </div>
