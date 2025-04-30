@@ -230,7 +230,7 @@ const Projects = () => {
         <div className="p-6">
           <h3 className="text-xl font-bold text-white mb-2">{project.name}</h3>
           
-          <p className="text-white/70 text-sm mb-4 line-clamp-3">{project.description}</p>
+          <p className="text-white/70 text-sm mb-4 line-clamp-4">{project.description}</p>
           
           {hasType && (
             <p className="text-white/50 text-xs mb-3">
