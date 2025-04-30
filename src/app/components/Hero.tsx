@@ -50,7 +50,8 @@ const Hero = () => {
           style={{
             backgroundImage: 'url("/profile.jpg")',
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center 30%',
+            backgroundColor: '#121212', // Fallback background color
           }}
         ></div>
         <div className="flex flex-col items-start text-left">
