@@ -17,35 +17,90 @@ import './swiper-styles.css';
 const appScreenshots = [
   {
     id: 1,
-    alt: "Dashboard",
-    caption: "Workout Dashboard",
+    alt: "Workout Planner",
+    caption: "Workout Planner",
     color: "#1E40AF", // Deep blue
   },
   {
     id: 2,
-    alt: "Exercise Library",
-    caption: "Exercise Library",
+    alt: "Progress Tracking",
+    caption: "Progress Tracker",
     color: "#047857", // Deep green
   },
   {
     id: 3,
-    alt: "Progress Tracking",
-    caption: "Progress Tracker",
+    alt: "AI Chat",
+    caption: "AI Assistant",
     color: "#7E22CE", // Deep purple
   },
   {
     id: 4,
-    alt: "Workout Planner",
-    caption: "Workout Planner",
+    alt: "Goals Tracking",
+    caption: "Goals Dashboard",
     color: "#B91C1C", // Deep red
   },
   {
     id: 5,
+    alt: "Goals History",
+    caption: "Goals History",
+    color: "#9D174D", // Deep pink
+  },
+  {
+    id: 6,
     alt: "Profile Settings",
     caption: "Profile Settings",
     color: "#0F766E", // Teal
   },
 ];
+
+// Define screen types for type safety
+type ScreenType = 
+  | "Workout Planner"
+  | "Progress Tracking"
+  | "AI Chat"
+  | "Goals Tracking"
+  | "Goals History"
+  | "Profile Settings";
+
+// Features by screen
+const featuresByScreen: Record<ScreenType, string[]> = {
+  "Workout Planner": [
+    "Create custom workout routines with drag-and-drop interface",
+    "Access to 500+ exercise database with video demonstrations",
+    "AI-powered suggestions based on your fitness goals",
+    "Schedule workouts with calendar integration and reminders"
+  ],
+  "Progress Tracking": [
+    "Visual charts and graphs to track performance over time",
+    "Body measurements and weight tracking with trend analysis",
+    "Comprehensive statistics for each exercise and muscle group",
+    "Photo timeline to visually track physical changes"
+  ],
+  "AI Chat": [
+    "Chat with AI fitness coach for real-time workout advice",
+    "Get personalized nutrition recommendations and meal plans",
+    "Ask questions about proper form and technique",
+    "Receive motivation and accountability check-ins"
+  ],
+  "Goals Tracking": [
+    "Set specific, measurable fitness goals with deadlines",
+    "Track progress towards strength, endurance, or weight goals",
+    "Milestone celebrations and achievement badges",
+    "Smart goal recommendations based on your fitness level"
+  ],
+  "Goals History": [
+    "Comprehensive history of all completed fitness goals",
+    "Analyze past performance and success patterns",
+    "Review goal achievement timelines and milestones",
+    "Export and share your fitness accomplishments"
+  ],
+  "Profile Settings": [
+    "Customize your fitness profile and preferences",
+    "Connect with fitness trackers and smartwatches",
+    "Manage privacy settings and data sharing options",
+    "Set notification preferences and workout reminders"
+  ]
+};
 
 const IronLogProject = () => {
   const pageRef = useRef<HTMLDivElement>(null);
@@ -53,6 +108,7 @@ const IronLogProject = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
+  const featureListRef = useRef<HTMLUListElement>(null);
   
   // Function to handle navigation and scrolling
   const handleBackToProjects = () => {
@@ -96,6 +152,35 @@ const IronLogProject = () => {
     }, 500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Effect to animate features when activeIndex changes
+  useEffect(() => {
+    if (!featureListRef.current) return;
+    
+    const featureItems = featureListRef.current.querySelectorAll('li');
+    
+    // Create animation for feature items
+    const tl = gsap.timeline({
+      defaults: {
+        duration: 0.3,
+        ease: "power2.out"
+      }
+    });
+    
+    // Animate out then in
+    tl.to(featureItems, { opacity: 0, y: 10, stagger: 0.05 })
+      .to(featureItems, { opacity: 1, y: 0, stagger: 0.1 }, "+=0.1");
+    
+    return () => {
+      tl.kill();
+    };
+  }, [activeIndex]);
+
+  // Current active screen
+  const activeScreen = appScreenshots[activeIndex]?.alt as ScreenType || "Workout Planner";
+  
+  // Current features based on active screen
+  const currentFeatures = featuresByScreen[activeScreen];
 
   return (
     <div 
@@ -149,7 +234,7 @@ const IronLogProject = () => {
                       </button>
                       
                       <Swiper
-                        initialSlide={2}
+                        initialSlide={0}
                         effect={'coverflow'}
                         centeredSlides={true}
                         slidesPerView={'auto'}
@@ -239,25 +324,18 @@ const IronLogProject = () => {
                   IronLog is a personal fitness tracking app designed for daily gym sessions, featuring AI integration that logs your workouts and provides intelligent, personalized insights through chat.
                 </p>
                 
-                <div className="pt-4">
-                  <h3 className="text-xl font-semibold mb-4">Key Features</h3>
-                  <ul className="space-y-3 text-white/70">
-                    <li className="flex items-start">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
-                      <span>Intelligent workout tracking with AI assistance</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
-                      <span>Personalized insights and analytics</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
-                      <span>Progress tracking with visual charts</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
-                      <span>Intuitive, clean user interface</span>
-                    </li>
+                <div className="pt-4 min-h-[220px]">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <span className="mr-2">Key Features:</span>
+                    <span className="text-base font-normal text-blue-400">{activeScreen}</span>
+                  </h3>
+                  <ul ref={featureListRef} className="space-y-3 text-white/70">
+                    {currentFeatures.map((feature: string, idx: number) => (
+                      <li key={`${activeIndex}-${idx}`} className="flex items-start transition-all duration-300">
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 
