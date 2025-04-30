@@ -84,9 +84,7 @@ const Hero = () => {
               </a>
             </div>
             <a
-              href="https://mail.google.com/mail/?view=cm&fs=1&to=arshgour16@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:arshgour16@gmail.com?subject=Portfolio%20Inquiry"
               className="contact-btn shine-hover mt-4 sm:mt-2 px-6 py-2.5 sm:px-7 border border-white text-white rounded-full flex items-center gap-2 text-base sm:text-lg font-semibold hover:bg-white/10 transition shadow-lg whitespace-nowrap align-middle"
               style={{
                 height: 'fit-content'
