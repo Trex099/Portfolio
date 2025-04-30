@@ -25,7 +25,7 @@ interface ProjectData {
 const projects: ProjectData[] = [
   {
     name: "IronLog",
-    description: "IronLog is a personal Fitness tracking app for daily gym sessions with AI integration that stores all your workout and chat to you based on that.",
+    description: "IronLog is a personal fitness tracking app designed for daily gym sessions, featuring AI integration that logs your workouts and provides intelligent, personalized insights through chat.",
     type: "Personal Project",
     technologies: ["Swift", "SwiftUI", "Firebase"],
     link: "/projects/ironlog",
