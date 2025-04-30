@@ -55,4 +55,4 @@ export default function RootLayout({
   );
 }
 
-// Force Vercel deployment timestamp: ${new Date().toISOString()}
+// Force Vercel deployment timestamp: ${new Date().toISOString()} - Updated favicon set
