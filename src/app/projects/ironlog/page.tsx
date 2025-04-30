@@ -1,48 +1,170 @@
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiActivity } from 'react-icons/fi';
 import gsap from 'gsap';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+import { Pagination, EffectCoverflow, Navigation, Autoplay, A11y } from 'swiper/modules';
+import Link from 'next/link';
+import { FaGithub, FaArrowRight } from 'react-icons/fa';
+import './swiper-styles.css';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import type { Swiper as SwiperType } from 'swiper';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-coverflow';
-import './swiper-styles.css';
 
 // Mock data for screenshots (to be replaced with real images)
 const appScreenshots = [
   {
     id: 1,
-    src: '/projects/ironlog/mockup1.png', // These files will be placeholders until real screenshots are added
-    alt: 'IronLog Dashboard',
-    caption: 'Dashboard screen showing workout summary'
+    alt: "Dashboard",
+    caption: "Workout Dashboard",
+    color: "#1E40AF", // Deep blue
   },
   {
     id: 2,
-    src: '/projects/ironlog/mockup2.png',
-    alt: 'Workout Tracking',
-    caption: 'Track your workouts with detailed metrics'
+    alt: "Exercise Library",
+    caption: "Exercise Library",
+    color: "#047857", // Deep green
   },
   {
     id: 3,
-    src: '/projects/ironlog/mockup3.png',
-    alt: 'AI Assistant',
-    caption: 'Get personalized insights from the AI assistant'
+    alt: "Progress Tracking",
+    caption: "Progress Tracker",
+    color: "#7E22CE", // Deep purple
   },
   {
     id: 4,
-    src: '/projects/ironlog/mockup4.png',
-    alt: 'Progress Tracking',
-    caption: 'View your progress over time with detailed analytics'
+    alt: "Workout Planner",
+    caption: "Workout Planner",
+    color: "#B91C1C", // Deep red
+  },
+  {
+    id: 5,
+    alt: "Profile Settings",
+    caption: "Profile Settings",
+    color: "#0F766E", // Teal
   },
 ];
+
+const ProjectCarousel = () => {
+  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Create an array of image placeholders with gradients
+  const images = [
+    { id: 1, alt: "Dashboard", gradient: "from-blue-500 to-indigo-600" },
+    { id: 2, alt: "Workout Log", gradient: "from-purple-500 to-pink-600" },
+    { id: 3, alt: "Exercise Library", gradient: "from-emerald-500 to-teal-600" },
+    { id: 4, alt: "Progress Stats", gradient: "from-orange-500 to-red-600" },
+    { id: 5, alt: "Settings", gradient: "from-gray-500 to-gray-700" }
+  ];
+
+  return (
+    <div className="relative w-full max-w-lg mx-auto px-4 py-8">
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        spaceBetween={20}
+        slidesPerView={1.5}
+        centeredSlides={true}
+        loop={true}
+        grabCursor={true}
+        pagination={{ clickable: true }}
+        navigation={{
+          prevEl: prevButtonRef.current,
+          nextEl: nextButtonRef.current,
+        }}
+        className="w-full overflow-visible"
+        onSwiper={(swiper: SwiperType) => {
+          // Update Swiper with navigation buttons after initialization
+          setTimeout(() => {
+            if (swiper.navigation && prevButtonRef.current && nextButtonRef.current) {
+              swiper.navigation.prevEl = prevButtonRef.current;
+              swiper.navigation.nextEl = nextButtonRef.current;
+              swiper.navigation.init();
+              swiper.navigation.update();
+            }
+          });
+        }}
+      >
+        {images.map((image) => (
+          <SwiperSlide key={image.id} className="w-auto h-auto">
+            {({ isActive }) => (
+              <div className={`relative transition-all duration-300 ${isActive ? 'scale-100' : 'scale-90 opacity-70'}`}>
+                <div className="relative w-[240px] h-[480px] overflow-hidden rounded-[36px] border-[6px] border-zinc-800 bg-zinc-800 shadow-xl">
+                  {/* iPhone notch */}
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-5 bg-zinc-800 rounded-b-xl z-10"></div>
+                  
+                  {/* Phone content area with gradient background */}
+                  <div className={`w-full h-full bg-gradient-to-br ${image.gradient} p-4 flex flex-col items-center justify-center`}>
+                    <div className="mb-4 bg-white/10 p-3 rounded-full">
+                      <FiActivity className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="text-white font-bold text-lg mb-2">{image.alt}</h3>
+                    <p className="text-white/70 text-xs text-center">
+                      IronLog fitness tracking app screenshot
+                    </p>
+                    
+                    {/* UI elements mockup */}
+                    <div className="mt-6 w-full">
+                      <div className="h-1.5 w-3/4 bg-white/20 rounded-full mb-3 mx-auto"></div>
+                      <div className="h-1.5 w-1/2 bg-white/20 rounded-full mb-6 mx-auto"></div>
+                      
+                      <div className="flex justify-center gap-2 mb-4">
+                        {[1, 2, 3].map(n => (
+                          <div key={n} className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                            <div className="w-5 h-5 rounded-md bg-white/20"></div>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="h-20 w-full bg-white/10 rounded-xl mb-4"></div>
+                      <div className="h-3 w-2/3 bg-white/20 rounded-full mx-auto"></div>
+                    </div>
+                  </div>
+                  
+                  {/* iPhone home indicator */}
+                  <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1/3 h-1 bg-white/30 rounded-full"></div>
+                </div>
+              </div>
+            )}
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      
+      {/* Custom navigation buttons */}
+      <button 
+        ref={prevButtonRef} 
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+        aria-label="Previous slide"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button 
+        ref={nextButtonRef} 
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+        aria-label="Next slide"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  );
+};
 
 const IronLogProject = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const prevButtonRef = useRef<HTMLButtonElement>(null);
+  const nextButtonRef = useRef<HTMLButtonElement>(null);
   
   // Function to handle navigation and scrolling
   const handleBackToProjects = () => {
@@ -79,18 +201,14 @@ const IronLogProject = () => {
     };
   }, []);
 
-  // Animation for slide captions
   useEffect(() => {
-    const captionElement = document.querySelector(`.caption-${activeIndex}`);
-    if (captionElement) {
-      gsap.fromTo(
-        captionElement,
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4 }
-      );
-    }
-  }, [activeIndex]);
-  
+    // Simulate load delay for animation purposes
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div 
       ref={pageRef}
@@ -127,70 +245,98 @@ const IronLogProject = () => {
             <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
               {/* Swiper carousel with iPhone-sized screenshots */}
               <div className="w-full lg:w-1/2 flex justify-center relative">
-                <div className="w-full max-w-[320px]">
-                  <Swiper
-                    effect={'coverflow'}
-                    grabCursor={true}
-                    centeredSlides={true}
-                    slidesPerView={'auto'}
-                    coverflowEffect={{
-                      rotate: 0,
-                      stretch: 0,
-                      depth: 100,
-                      modifier: 2.5,
-                      slideShadows: true,
-                    }}
-                    pagination={{ 
-                      el: '.swiper-pagination',
-                      clickable: true,
-                      dynamicBullets: true,
-                    }}
-                    navigation={{
-                      nextEl: '.swiper-button-next',
-                      prevEl: '.swiper-button-prev',
-                    }}
-                    autoplay={{
-                      delay: 3500,
-                      disableOnInteraction: false,
-                    }}
-                    modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-                    onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-                    className="w-full pb-12"
+                <div className="w-full max-w-[500px]">
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isLoaded ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-full max-w-[500px] relative"
                   >
-                    {appScreenshots.map((screenshot) => (
-                      <SwiperSlide key={screenshot.id} className="w-[280px] h-[580px] rounded-3xl overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-b from-indigo-900/40 to-purple-900/40 rounded-3xl border-4 border-white/10 relative overflow-hidden shadow-[0_0_15px_rgba(80,60,200,0.3)]">
-                          {/* iPhone mockup with notch */}
-                          <div className="absolute top-0 left-0 right-0 h-6 bg-black rounded-t-3xl flex justify-center items-center">
-                            <div className="w-32 h-4 bg-black rounded-b-xl"></div>
-                          </div>
-                          
-                          {/* Content area (placeholder for actual screenshots) */}
-                          <div className="absolute top-6 left-0 right-0 bottom-0 bg-indigo-900/20 flex items-center justify-center">
-                            <div className="text-center px-4">
-                              <div className="flex justify-center mb-4">
-                                <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
-                                  <span className="text-2xl">#{screenshot.id}</span>
+                    <div className="flex items-center justify-center">
+                      <button 
+                        ref={prevButtonRef}
+                        className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gray-800/50 backdrop-blur-md text-white absolute left-2 z-10 hover:bg-gray-700/70 transition-colors"
+                      >
+                        <ArrowLeft size={20} />
+                      </button>
+                      
+                      <Swiper
+                        initialSlide={2}
+                        effect={'coverflow'}
+                        centeredSlides={true}
+                        slidesPerView={'auto'}
+                        coverflowEffect={{
+                          rotate: 0,
+                          stretch: 0,
+                          depth: 100,
+                          modifier: 2.5,
+                          slideShadows: false,
+                        }}
+                        grabCursor={true}
+                        pagination={{ 
+                          clickable: true,
+                          dynamicBullets: true,
+                        }}
+                        navigation={{
+                          prevEl: prevButtonRef.current,
+                          nextEl: nextButtonRef.current,
+                        }}
+                        modules={[EffectCoverflow, Pagination, Navigation, A11y]}
+                        spaceBetween={-15}
+                        loop={false}
+                        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+                        onSwiper={(swiper: SwiperType) => {
+                          // Update Swiper with navigation buttons after initialization
+                          setTimeout(() => {
+                            if (swiper.navigation && prevButtonRef.current && nextButtonRef.current) {
+                              swiper.navigation.prevEl = prevButtonRef.current;
+                              swiper.navigation.nextEl = nextButtonRef.current;
+                              swiper.navigation.init();
+                              swiper.navigation.update();
+                            }
+                          });
+                        }}
+                        className="mySwiper"
+                      >
+                        {appScreenshots.map((screenshot, index) => (
+                          <SwiperSlide key={screenshot.id} className="swiper-slide" style={{ width: 'auto' }}>
+                            <div className="iphone-mockup">
+                              <div className="iphone-notch"></div>
+                              <div className="iphone-screen">
+                                <div 
+                                  className="iphone-screen-content"
+                                  style={{ 
+                                    background: `linear-gradient(135deg, ${screenshot.color}CC, rgba(0,0,0,0.85))`,
+                                  }}
+                                >
+                                  <div className="flex flex-col items-center justify-center h-full px-4 text-white">
+                                    <div className="w-14 h-14 mb-4 rounded-xl bg-white/15 flex items-center justify-center backdrop-blur-sm">
+                                      <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m0-16l-4 4m4-4l4 4" />
+                                      </svg>
+                                    </div>
+                                    <h3 className="text-lg font-bold mb-2">{screenshot.alt}</h3>
+                                    <p className="text-xs opacity-80">{screenshot.caption}</p>
+                                    <div className="mt-5 px-4 py-2 rounded-lg bg-white/10 text-xs backdrop-blur-sm">
+                                      {index === activeIndex ? "Coming Soon" : ""}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                              <h3 className="text-lg font-bold mb-2">{screenshot.alt}</h3>
-                              <p className="text-sm text-white/70">
-                                {screenshot.caption}
-                              </p>
+                              <div className="iphone-home-indicator"></div>
                             </div>
-                          </div>
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                    
-                    {/* Custom pagination */}
-                    <div className="swiper-pagination mt-6"></div>
-                    
-                    {/* Slide counter */}
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white/10 px-3 py-1 rounded-full text-xs text-white/80 backdrop-blur-sm">
-                      {activeIndex + 1} / {appScreenshots.length}
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      
+                      <button 
+                        ref={nextButtonRef}
+                        className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gray-800/50 backdrop-blur-md text-white absolute right-2 z-10 hover:bg-gray-700/70 transition-colors"
+                      >
+                        <ArrowRight size={20} />
+                      </button>
                     </div>
-                  </Swiper>
+                  </motion.div>
                 </div>
               </div>
               
