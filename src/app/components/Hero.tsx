@@ -45,15 +45,13 @@ const Hero = () => {
     <section ref={heroRef} id="home" className="flex flex-col items-center justify-center min-h-[80vh] sm:min-h-[70vh] pt-20 pb-12 text-center sm:pt-20 sm:pb-10">
       {/* Profile info with horizontal layout */}
       <div className="profile-section flex flex-row items-center mb-3 sm:mb-4">
-        <div 
-          className="avatar-container w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-white/30 shadow-lg flex items-center justify-center mr-4 sm:mr-5"
-          style={{
-            backgroundImage: 'url("/profile.jpg")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 30%',
-            backgroundColor: '#121212', // Fallback background color
-          }}
-        ></div>
+        <div className="avatar-container w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-white/30 shadow-lg mr-4 sm:mr-5 overflow-hidden relative">
+          <img 
+            src="/profile.jpg" 
+            alt="Arsh Gour"
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
         <div className="flex flex-col items-start text-left">
           <h2 className="hero-name text-xl sm:text-2xl font-semibold tracking-wide text-white/80">Arsh Gour</h2>
           <p className="hero-location text-sm sm:text-base text-white">🇮🇳 Based in India</p>
