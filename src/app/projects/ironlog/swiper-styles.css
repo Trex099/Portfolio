@@ -103,42 +103,19 @@
   z-index: 10;
 }
 
-/* Pagination and Controls */
-.swiper-pagination {
-  position: absolute;
-  bottom: 10px !important;
-}
-
-.swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.3);
-  opacity: 1;
-  transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-  background: rgba(255, 255, 255, 0.9);
-  width: 10px;
-  height: 10px;
-}
-
-/* Slide Counter */
+/* Slide Counter Styles */
 .slide-counter {
-  position: absolute;
-  bottom: -40px;
-  right: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
-  background-color: rgba(0, 0, 0, 0.2);
-  padding: 4px 10px;
-  border-radius: 12px;
-  z-index: 5;
-}
-
-.slide-counter .current {
   color: white;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Animations */

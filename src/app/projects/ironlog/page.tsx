@@ -271,10 +271,7 @@ const IronLogProject = () => {
                           slideShadows: false,
                         }}
                         grabCursor={true}
-                        pagination={{ 
-                          clickable: true,
-                          dynamicBullets: true,
-                        }}
+                        pagination={false}
                         navigation={{
                           prevEl: prevButtonRef.current,
                           nextEl: nextButtonRef.current,
@@ -326,6 +323,11 @@ const IronLogProject = () => {
                           </SwiperSlide>
                         ))}
                       </Swiper>
+                      
+                      {/* Slide Counter */}
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm z-10 mt-4 mb-2">
+                        {activeIndex + 1}/{appScreenshots.length}
+                      </div>
                       
                       <button 
                         ref={nextButtonRef}
