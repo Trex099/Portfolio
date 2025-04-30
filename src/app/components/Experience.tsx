@@ -128,18 +128,20 @@ const Experience = () => {
     // Only use ScrollTrigger for items that might be below the fold
     if (timelineItems.length > 3) {
       const belowFoldItems = Array.from(timelineItems).slice(3);
-      belowFoldItems.forEach((item, index) => {
-        gsap.to(item, {
-          x: 0,
-          opacity: 1,
-          duration: 0.4,
-          delay: 0.05 * index, // Reduced delay
-          scrollTrigger: {
-            trigger: item,
-            start: "top 90%", // Trigger earlier (higher in the viewport)
-            toggleActions: "play none none none"
-          }
-        });
+      
+      // Use a single ScrollTrigger for all items instead of multiple ones
+      gsap.to(belowFoldItems, {
+        x: 0,
+        opacity: 1,
+        stagger: 0.05, // Short stagger for sequential appearance
+        duration: 0.4,
+        scrollTrigger: {
+          trigger: currentList,
+          start: "30% 90%", // Trigger earlier
+          toggleActions: "play none none none",
+          // Add markers: true for debugging
+          once: true, // Only trigger once for performance
+        }
       });
     }
     

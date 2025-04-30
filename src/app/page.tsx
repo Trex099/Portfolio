@@ -34,19 +34,21 @@ export default function Home() {
     
     // Create initial state - elements start from slightly below with opacity 0
     gsap.set(sections, { 
-      y: 80, 
-      opacity: 0 
+      y: 40,
+      opacity: 0,
+      willChange: 'transform, opacity'
     });
     
     gsap.set(footer, { 
-      y: 40, 
-      opacity: 0 
+      y: 20,
+      opacity: 0,
+      willChange: 'transform, opacity'
     });
     
     // Create timeline for smooth staggered animations
     const tl = gsap.timeline({ 
       defaults: { 
-        ease: "power3.out" 
+        ease: "power2.out"
       } 
     });
     
@@ -54,8 +56,8 @@ export default function Home() {
     tl.to(sections, {
       y: 0,
       opacity: 1,
-      duration: 0.8,
-      stagger: 0.15,
+      duration: 0.6,
+      stagger: 0.08,
       clearProps: "all"
     });
     
@@ -63,9 +65,9 @@ export default function Home() {
     tl.to(footer, {
       y: 0,
       opacity: 1,
-      duration: 0.5,
+      duration: 0.4,
       clearProps: "all"
-    }, "-=0.3");
+    }, "-=0.2");
     
     // Cleanup
     return () => {
