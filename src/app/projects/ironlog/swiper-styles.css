@@ -4,7 +4,8 @@
 .swiper {
   width: 100%;
   height: 100%;
-  padding: 40px 0 70px;
+  padding: 60px 0 80px;
+  margin-top: 10px;
 }
 
 /* Slide Styles */
@@ -39,7 +40,7 @@
 .iphone-mockup {
   position: relative;
   width: 240px;
-  height: 490px;
+  height: 480px;
   background: #121212;
   border-radius: 36px;
   overflow: hidden;
@@ -48,6 +49,7 @@
               0 0 0 1px rgba(255, 255, 255, 0.05), 
               inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 20px 0;
 }
 
 .swiper-slide-active .iphone-mockup {
@@ -104,7 +106,7 @@
 /* Pagination and Controls */
 .swiper-pagination {
   position: absolute;
-  bottom: 0px !important;
+  bottom: 10px !important;
 }
 
 .swiper-pagination-bullet {
@@ -164,18 +166,24 @@
 @media (max-width: 768px) {
   .iphone-mockup {
     max-width: 220px;
-    height: 450px;
+    height: 440px;
+    margin: 15px 0;
   }
   
   .swiper-slide-iphone {
     width: 220px;
+  }
+  
+  .swiper {
+    padding: 50px 0 70px;
   }
 }
 
 @media (max-width: 480px) {
   .iphone-mockup {
     max-width: 200px;
-    height: 410px;
+    height: 400px;
+    margin: 10px 0;
   }
   
   .swiper-slide-iphone {
@@ -183,8 +191,8 @@
   }
   
   .swiper {
-    padding-top: 20px;
-    padding-bottom: 40px;
+    padding: 30px 0 50px;
+    margin-top: 5px;
   }
 }
 

@@ -239,13 +239,13 @@ const IronLogProject = () => {
             <p className="text-xl text-white/70">Personal Fitness Tracking App</p>
           </div>
           
-          <div className="rounded-xl bg-black/40 border border-white/10 p-6 md:p-8 shadow-lg animate-fade-in overflow-hidden">
-            <h2 className="text-2xl font-bold mb-6">Project Overview</h2>
+          <div className="rounded-xl bg-black/40 border border-white/10 p-6 md:p-10 shadow-lg animate-fade-in overflow-hidden">
+            <h2 className="text-2xl font-bold mb-8">Project Overview</h2>
             
             <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
               {/* Swiper carousel with iPhone-sized screenshots */}
               <div className="w-full lg:w-1/2 flex justify-center relative">
-                <div className="w-full max-w-[500px]">
+                <div className="w-full max-w-[500px] pt-10 pb-6">
                   <motion.div 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -296,7 +296,7 @@ const IronLogProject = () => {
                             }
                           });
                         }}
-                        className="mySwiper"
+                        className="mySwiper h-auto"
                       >
                         {appScreenshots.map((screenshot, index) => (
                           <SwiperSlide key={screenshot.id} className="swiper-slide" style={{ width: 'auto' }}>
@@ -341,14 +341,14 @@ const IronLogProject = () => {
               </div>
               
               {/* Description section */}
-              <div className="w-full lg:w-1/2 space-y-4">
-                <p className="text-white/70 leading-relaxed">
+              <div className="w-full lg:w-1/2 space-y-6">
+                <p className="text-white/70 leading-relaxed text-lg">
                   IronLog is a personal fitness tracking app designed for daily gym sessions, featuring AI integration that logs your workouts and provides intelligent, personalized insights through chat.
                 </p>
                 
                 <div className="pt-4">
-                  <h3 className="text-xl font-semibold mb-3">Key Features</h3>
-                  <ul className="space-y-2 text-white/70">
+                  <h3 className="text-xl font-semibold mb-4">Key Features</h3>
+                  <ul className="space-y-3 text-white/70">
                     <li className="flex items-start">
                       <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
                       <span>Intelligent workout tracking with AI assistance</span>
@@ -368,7 +368,7 @@ const IronLogProject = () => {
                   </ul>
                 </div>
                 
-                <div className="pt-2">
+                <div className="pt-3">
                   <p className="text-white/50 text-sm italic">
                     Full case study and additional details coming soon.
                   </p>
@@ -377,7 +377,7 @@ const IronLogProject = () => {
             </div>
           </div>
           
-          <div className="rounded-xl bg-black/40 border border-white/10 p-6 md:p-8 shadow-lg animate-fade-in">
+          <div className="rounded-xl bg-black/40 border border-white/10 p-6 md:p-10 shadow-lg animate-fade-in">
             <h2 className="text-2xl font-bold mb-6">Technologies Used</h2>
             <div className="flex flex-wrap gap-3">
               <span className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/30 to-purple-600/30 text-white border border-white/20">
