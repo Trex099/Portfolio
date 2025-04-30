@@ -104,7 +104,7 @@ const Projects = () => {
   }, []);
 
   // Custom project card component
-  const ProjectCard = ({ project, index }: { project: ProjectData, index: number }) => {
+  const ProjectCard = ({ project }: { project: ProjectData }) => {
     const cardRef = useRef<HTMLDivElement>(null);
     
     // Ensure hover animations work reliably
@@ -267,14 +267,14 @@ const Projects = () => {
         <div ref={noteRef} className="bg-black/40 p-6 rounded-xl mb-10 border border-white/20 shadow-lg">
           <h3 className="text-xl font-semibold text-white mb-3">Note</h3>
           <p className="text-white/80 leading-relaxed">
-            Many of the projects I've worked on are under strict Non-Disclosure Agreements (NDAs) and cannot be publicly shared. The projects displayed in this portfolio represent only a small fraction of my actual work. I've made substantial contributions to private repositories, internal tools, and production systems for clients and companies whose names and GitHub links I am contractually unable to disclose.
+            Many of the projects I&apos;ve worked on are under strict Non-Disclosure Agreements (NDAs) and cannot be publicly shared. The projects displayed in this portfolio represent only a small fraction of my actual work. I&apos;ve made substantial contributions to private repositories, internal tools, and production systems for clients and companies whose names and GitHub links I am contractually unable to disclose.
           </p>
         </div>
         
         {/* Projects Grid - Now with max of 2 columns */}
         <div ref={projectsRef} className="grid md:grid-cols-2 gap-8 w-full">
           {projects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} index={idx} />
+            <ProjectCard key={idx} project={project} />
           ))}
         </div>
       </div>

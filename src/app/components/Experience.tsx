@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -152,7 +152,7 @@ const Experience = () => {
       });
       tl.kill();
     };
-  }, []); // Only run once on initial mount
+  }, [tab]); // Added 'tab' to dependency array
 
   // Function to update line heights
   const updateLineHeights = () => {
