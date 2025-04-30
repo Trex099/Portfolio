@@ -153,34 +153,57 @@ const IronLogProject = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Current active screen
+  const activeScreen = appScreenshots[activeIndex]?.alt as ScreenType || "Workout Planner";
+  
+  // Add state to track previous features to prevent content flash
+  const [displayedFeatures, setDisplayedFeatures] = useState(featuresByScreen[activeScreen]);
+  
   // Effect to animate features when activeIndex changes
   useEffect(() => {
     if (!featureListRef.current) return;
     
     const featureItems = featureListRef.current.querySelectorAll('li');
     
+    // Get current screen features
+    const nextScreenFeatures = featuresByScreen[activeScreen];
+    
     // Create animation for feature items
     const tl = gsap.timeline({
       defaults: {
         duration: 0.3,
         ease: "power2.out"
+      },
+      onComplete: () => {
+        // Update state after animation completes
+        setDisplayedFeatures(nextScreenFeatures);
       }
     });
     
-    // Animate out then in
-    tl.to(featureItems, { opacity: 0, y: 10, stagger: 0.05 })
-      .to(featureItems, { opacity: 1, y: 0, stagger: 0.1 }, "+=0.1");
+    // Animate out
+    tl.to(featureItems, { 
+      opacity: 0, 
+      y: 10, 
+      stagger: 0.05,
+      onComplete: () => {
+        // Update the displayed features mid-animation
+        setDisplayedFeatures(nextScreenFeatures);
+      }
+    })
+    .to(featureItems, { 
+      opacity: 0, 
+      duration: 0.1 
+    }) // Small pause
+    .to(featureItems, { 
+      opacity: 1, 
+      y: 0, 
+      stagger: 0.1 
+    });
     
     return () => {
       tl.kill();
     };
-  }, [activeIndex]);
-
-  // Current active screen
-  const activeScreen = appScreenshots[activeIndex]?.alt as ScreenType || "Workout Planner";
-  
-  // Current features based on active screen
-  const currentFeatures = featuresByScreen[activeScreen];
+  }, [activeIndex, activeScreen]);
 
   return (
     <div 
@@ -330,8 +353,8 @@ const IronLogProject = () => {
                     <span className="text-base font-normal text-blue-400">{activeScreen}</span>
                   </h3>
                   <ul ref={featureListRef} className="space-y-3 text-white/70">
-                    {currentFeatures.map((feature: string, idx: number) => (
-                      <li key={`${activeIndex}-${idx}`} className="flex items-start transition-all duration-300">
+                    {displayedFeatures.map((feature: string, idx: number) => (
+                      <li key={`feature-${idx}`} className="flex items-start transition-all duration-300">
                         <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 mr-2"></span>
                         <span>{feature}</span>
                       </li>
