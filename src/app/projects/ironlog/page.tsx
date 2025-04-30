@@ -7,8 +7,6 @@ import { Pagination, EffectCoverflow, Navigation, Autoplay, A11y } from 'swiper/
 import Link from 'next/link';
 import { FaGithub, FaArrowRight } from 'react-icons/fa';
 import './swiper-styles.css';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import type { Swiper as SwiperType } from 'swiper';
 
 // Import Swiper styles
@@ -139,7 +137,7 @@ const ProjectCarousel = () => {
       {/* Custom navigation buttons */}
       <button 
         ref={prevButtonRef} 
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full hidden md:flex items-center justify-center backdrop-blur-sm"
         aria-label="Previous slide"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -148,7 +146,7 @@ const ProjectCarousel = () => {
       </button>
       <button 
         ref={nextButtonRef} 
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 bg-zinc-900/50 hover:bg-zinc-900 text-white w-10 h-10 rounded-full hidden md:flex items-center justify-center backdrop-blur-sm"
         aria-label="Next slide"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -246,18 +244,18 @@ const IronLogProject = () => {
               {/* Swiper carousel with iPhone-sized screenshots */}
               <div className="w-full lg:w-1/2 flex justify-center relative">
                 <div className="w-full max-w-[500px] pt-10 pb-6">
-                  <motion.div 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isLoaded ? 1 : 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full max-w-[500px] relative"
+                  <div 
+                    className={`w-full max-w-[500px] relative transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                   >
                     <div className="flex items-center justify-center">
                       <button 
                         ref={prevButtonRef}
                         className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gray-800/50 backdrop-blur-md text-white absolute left-2 z-10 hover:bg-gray-700/70 transition-colors"
+                        aria-label="Previous slide"
                       >
-                        <ArrowLeft size={20} />
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
                       </button>
                       
                       <Swiper
@@ -332,11 +330,14 @@ const IronLogProject = () => {
                       <button 
                         ref={nextButtonRef}
                         className="hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-gray-800/50 backdrop-blur-md text-white absolute right-2 z-10 hover:bg-gray-700/70 transition-colors"
+                        aria-label="Next slide"
                       >
-                        <ArrowRight size={20} />
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
                       </button>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
               
