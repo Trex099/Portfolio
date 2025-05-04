@@ -247,6 +247,14 @@ const IronLogProject = () => {
     <div ref={pageRef} className="min-h-screen w-full bg-gray-900 text-white">
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-blue-900/30 to-transparent"></div>
       
+      {/* Page in construction status - Moved to top navbar area */}
+      <div className="w-full flex justify-center mt-24 mb-4">
+        <div className="flex items-center bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+          <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+          <span className="text-yellow-400 text-sm font-medium">Page in construction</span>
+        </div>
+      </div>
+      
       <div className="max-w-6xl mx-auto px-4 py-16 relative z-10">
         <div className="mb-12 animate-fade-in flex items-center justify-between">
           <a 
@@ -275,14 +283,6 @@ const IronLogProject = () => {
               <FiGithub className="mr-2 text-white/80" size={16} />
               <span className="text-white/80 text-sm font-medium">GitHub</span>
             </a>
-          </div>
-        </div>
-        
-        {/* Page in construction status */}
-        <div className="w-full flex justify-center mb-8 -mt-4">
-          <div className="flex items-center bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
-            <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
-            <span className="text-yellow-400 text-sm font-medium">Page in construction</span>
           </div>
         </div>
         
