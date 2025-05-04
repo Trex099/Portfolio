@@ -31,9 +31,11 @@ const projects: ProjectData[] = [
     link: "/projects/ironlog",
   },
   {
-    name: "Project Two",
-    description: "A dashboard for managing business analytics.",
-    link: "#",
+    name: "Business Analytics Dashboard",
+    description: "A comprehensive business intelligence platform that transforms complex data into actionable insights through interactive visualizations and real-time analytics.",
+    type: "Web Application",
+    technologies: ["React", "TypeScript", "D3.js", "Node.js"],
+    link: "/projects/dashboard",
   },
   {
     name: "Project Three",
