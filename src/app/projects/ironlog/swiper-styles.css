@@ -12,8 +12,8 @@
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 350px !important;
-  height: 680px;
+  width: 390px !important;
+  height: 720px;
   transform: scale(0.85);
   transition: transform 0.3s;
   position: relative;
@@ -32,265 +32,294 @@
   transform: scale(0.9);
 }
 
-/* iPhone 13 Mockup Styles */
+/* iPhone 13 Mockup */
 .iphone-mockup {
   width: 100%;
   height: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: visible;
 }
 
-.iphone15 {
+/* iPhone 13 Frame */
+.iphone-frame {
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50px;
+  overflow: visible;
 }
 
-/* iPhone Frame */
-.iphone15:before {
+/* iPhone 13 outer shell */
+.iphone-frame:before {
   content: '';
   position: absolute;
-  width: 92%;
-  height: 99%;
-  background: #111111;
-  border-radius: 45px;
+  width: 94%;
+  height: 98%;
+  background: #121212;
+  border-radius: 50px;
   box-shadow: 
-    0 0 0 1px rgba(40, 40, 40, 0.5),
-    0 20px 40px -12px rgba(0, 0, 0, 0.5),
-    0 8px 15px rgba(0, 0, 0, 0.2),
-    inset 0 0 10px rgba(0, 0, 0, 0.3);
+    0 0 0 1px rgba(50, 50, 50, 0.3),
+    0 6px 18px rgba(0, 0, 0, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
-/* Volume Buttons */
-.iphone15:after {
-  content: '';
+/* Side buttons container */
+.iphone-buttons {
   position: absolute;
-  width: 3px;
-  height: 70px;
-  background: #000;
-  left: 4.2%;
-  top: 150px;
-  border-radius: 3px;
-  box-shadow: 
-    0 0 0 1px rgba(50, 50, 50, 0.5),
-    inset 0 0 2px rgba(0, 0, 0, 0.8);
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
+  pointer-events: none;
 }
 
-/* Power Button */
-.iphone15 .power-button {
+/* Volume up button */
+.iphone-buttons:before {
+  content: '';
   position: absolute;
+  left: -2px;
+  top: 130px;
+  width: 3px;
+  height: 30px;
+  background: #000;
+  border-radius: 2px;
+  box-shadow: -1px 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Volume down button */
+.iphone-buttons:after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 180px;
+  width: 3px;
+  height: 30px;
+  background: #000;
+  border-radius: 2px;
+  box-shadow: -1px 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Power button */
+.power-button {
+  position: absolute;
+  right: -2px;
+  top: 150px;
   width: 3px;
   height: 40px;
   background: #000;
-  right: 4.2%;
-  top: 150px;
-  border-radius: 3px;
-  box-shadow: 
-    0 0 0 1px rgba(50, 50, 50, 0.5),
-    inset 0 0 2px rgba(0, 0, 0, 0.8);
+  border-radius: 2px;
+  box-shadow: 1px 0 1px rgba(255, 255, 255, 0.1);
   z-index: 2;
 }
 
-/* iPhone Internal Screen */
+/* iPhone screen */
 .iphone-screen {
-  width: 85%;
-  height: 94%;
-  overflow: hidden;
   position: relative;
+  width: 86%;
+  height: 92%;
+  background: #000;
+  border-radius: 40px;
+  overflow: hidden;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  border-radius: 38px;
-  background-color: #000;
-  z-index: 2;
 }
 
-/* iPhone Notch */
+/* iPhone notch */
 .iphone-notch {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 55%;
-  height: 34px;
-  background-color: #000000;
+  width: 50%;
+  height: 35px;
+  background: #000;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
   z-index: 10;
-  overflow: hidden;
 }
 
-/* Add notch details */
+/* Speaker in notch */
 .iphone-notch:before {
   content: '';
   position: absolute;
-  width: 8px;
-  height: 8px;
-  background: #333;
-  border-radius: 50%;
-  top: 10px;
-  left: 35%;
-  box-shadow: inset 0 0 2px #000;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 3px;
 }
 
+/* Camera in notch */
 .iphone-notch:after {
   content: '';
   position: absolute;
+  top: 8px;
+  right: 25%;
   width: 10px;
   height: 10px;
-  background: #222;
+  background: #1a1a1a;
   border-radius: 50%;
-  top: 9px;
-  right: 35%;
-  box-shadow: inset 0 0 3px #000;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.8);
 }
 
-/* Status Bar Positioning for iPhone 13 */
+/* Status bar */
 .status-bar {
-  width: 100%;
   position: absolute;
-  top: 12px;
+  top: 0;
   left: 0;
-  padding: 0;
-  z-index: 9;
+  width: 100%;
+  height: 40px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  z-index: 5;
 }
 
+/* Time in status bar */
 .status-time {
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-  letter-spacing: -0.5px;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   position: absolute;
+  width: 60px;
   left: 50%;
   transform: translateX(-50%);
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.5px;
   z-index: 11;
 }
 
+/* Status icons container */
 .status-icons {
-  display: flex;
-  gap: 5px;
-  align-items: center;
   position: absolute;
-  right: 16px;
+  right: 15px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.status-icons .icon {
-  position: relative;
-}
-
-/* Signal Icon */
-.status-icons .icon.signal {
-  width: 18px;
-  height: 12px;
+/* Signal bars */
+.icon.signal {
   display: flex;
   align-items: flex-end;
+  height: 12px;
   gap: 1px;
 }
 
-.status-icons .icon.signal .bar-1,
-.status-icons .icon.signal .bar-2,
-.status-icons .icon.signal .bar-3,
-.status-icons .icon.signal .bar-4 {
+.icon.signal .bar-1,
+.icon.signal .bar-2,
+.icon.signal .bar-3,
+.icon.signal .bar-4 {
   width: 3px;
   background: white;
   border-radius: 1px;
 }
 
-.status-icons .icon.signal .bar-1 {
+.icon.signal .bar-1 {
   height: 5px;
 }
 
-.status-icons .icon.signal .bar-2 {
-  height: 8px;
-}
-
-.status-icons .icon.signal .bar-3 {
-  height: 10px;
-}
-
-.status-icons .icon.signal .bar-4 {
-  height: 12px;
-}
-
-.status-icons .icon.signal::before,
-.status-icons .icon.signal::after {
-  display: none;
-}
-
-/* WiFi Icon */
-.status-icons .icon.wifi {
-  width: 15px;
-  height: 12px;
-  position: relative;
-}
-
-.status-icons .icon.wifi::before {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 0;
-  width: 15px;
-  height: 15px;
-  border: 1.5px solid white;
-  border-bottom: none;
-  border-radius: 7.5px 7.5px 0 0; 
-  transform: rotate(135deg) translate(-8px, 0);
-}
-
-.status-icons .icon.wifi::after {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 4px;
-  width: 7px;
+.icon.signal .bar-2 {
   height: 7px;
-  border: 1.5px solid white;
-  border-bottom: none;
-  border-radius: 3.5px 3.5px 0 0;
-  transform: rotate(135deg) translate(-4px, 0);
 }
 
-/* Battery Icon */
-.status-icons .icon.battery {
+.icon.signal .bar-3 {
+  height: 9px;
+}
+
+.icon.signal .bar-4 {
+  height: 12px;
+}
+
+/* WiFi icon */
+.icon.wifi {
+  position: relative;
+  width: 16px;
+  height: 12px;
+}
+
+.icon.wifi:before {
+  content: '';
+  position: absolute;
+  border: 1.5px solid white;
+  border-bottom: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 8px 8px 0 0;
+  transform: rotate(45deg) translate(1px, -10px);
+}
+
+.icon.wifi:after {
+  content: '';
+  position: absolute;
+  border: 1.5px solid white;
+  border-bottom: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px 4px 0 0;
+  transform: rotate(45deg) translate(1px, -5px);
+}
+
+/* Battery icon */
+.icon.battery {
+  position: relative;
   width: 24px;
   height: 12px;
-  position: relative;
-  display: inline-block;
   border: 1px solid white;
   border-radius: 3px;
-  margin-left: 1px;
+  padding: 1px;
 }
 
-.status-icons .icon.battery::before {
+.icon.battery:before {
   content: '';
   position: absolute;
+  right: -4px;
   top: 3px;
-  right: -3px;
   width: 2px;
-  height: 4px;
+  height: 6px;
   background: white;
-  border-radius: 0 1px 1px 0;
+  border-radius: 0 2px 2px 0;
 }
 
-.status-icons .icon.battery::after {
+.icon.battery:after {
   content: '';
   position: absolute;
-  top: 2px;
   left: 2px;
+  top: 2px;
   width: 18px;
   height: 6px;
   background: white;
   border-radius: 1px;
 }
 
-/* App Header */
+/* App content area */
+.iphone-content {
+  flex: 1;
+  padding: 15px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #0a0a0a;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* App header */
 .app-header {
   height: 60px;
   width: 100%;
@@ -299,20 +328,22 @@
   align-items: center;
   padding: 0 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-top: 40px;
 }
 
-/* iPhone Content */
-.iphone-content {
-  padding: 15px;
-  height: calc(100% - 100px);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background-color: #0a0a0a;
-  overflow-y: auto;
+/* Home indicator */
+.iphone-home-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 3px;
+  z-index: 10;
 }
 
+/* Fitness chart */
 .fitness-chart {
   width: 100%;
   height: 200px;
@@ -342,6 +373,7 @@
   background: linear-gradient(to top, rgba(59, 130, 246, 0.7), rgba(37, 99, 235, 0.7));
 }
 
+/* Data grid */
 .data-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -368,6 +400,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
+/* Workout list */
 .workout-list {
   display: flex;
   flex-direction: column;
@@ -382,19 +415,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.iphone-home-indicator {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 5px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 3px;
-  z-index: 10;
-}
-
-/* Pagination bullets styles */
+/* Pagination bullets */
 .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
@@ -408,59 +429,15 @@
   border-radius: 5px;
 }
 
-/* Slide Counter Styles */
-.slide-counter {
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 14px;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.3s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Animations */
-.caption-fadeIn {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Improve swipe experience */
-.swiper-wrapper {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
   .swiper-slide {
-    width: 280px !important;
-    height: 580px;
-  }
-  
-  .iphone15:before {
-    border-radius: 45px;
-  }
-  
-  .iphone-screen {
-    border-radius: 40px;
+    width: 320px !important;
+    height: 650px;
   }
 }
 
-/* Navigation button styles */
+/* Navigation buttons */
 .mySwiper button {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -470,7 +447,7 @@
   opacity: 1;
 }
 
-/* Animation for hover effect */
+/* Hover effects */
 @media (hover: hover) {
   .swiper-slide:hover {
     transform: scale(0.9);
