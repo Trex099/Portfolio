@@ -12,8 +12,8 @@
 .swiper-slide {
   background-position: center;
   background-size: cover;
-  width: 390px !important;
-  height: 720px;
+  width: 380px !important;
+  height: 580px;
   transform: scale(0.85);
   transition: transform 0.3s;
   position: relative;
@@ -32,291 +32,17 @@
   transform: scale(0.9);
 }
 
-/* iPhone 13 Mockup */
-.iphone-mockup {
+/* App content container */
+.app-content {
   width: 100%;
   height: 100%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-}
-
-/* iPhone 13 Frame */
-.iphone-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50px;
-  overflow: visible;
-}
-
-/* iPhone 13 outer shell */
-.iphone-frame:before {
-  content: '';
-  position: absolute;
-  width: 94%;
-  height: 98%;
-  background: #121212;
-  border-radius: 50px;
-  box-shadow: 
-    0 0 0 1px rgba(50, 50, 50, 0.3),
-    0 6px 18px rgba(0, 0, 0, 0.4),
-    0 10px 30px rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-/* Side buttons container */
-.iphone-buttons {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Volume up button */
-.iphone-buttons:before {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 130px;
-  width: 3px;
-  height: 30px;
-  background: #000;
-  border-radius: 2px;
-  box-shadow: -1px 0 1px rgba(255, 255, 255, 0.1);
-}
-
-/* Volume down button */
-.iphone-buttons:after {
-  content: '';
-  position: absolute;
-  left: -2px;
-  top: 180px;
-  width: 3px;
-  height: 30px;
-  background: #000;
-  border-radius: 2px;
-  box-shadow: -1px 0 1px rgba(255, 255, 255, 0.1);
-}
-
-/* Power button */
-.power-button {
-  position: absolute;
-  right: -2px;
-  top: 150px;
-  width: 3px;
-  height: 40px;
-  background: #000;
-  border-radius: 2px;
-  box-shadow: 1px 0 1px rgba(255, 255, 255, 0.1);
-  z-index: 2;
-}
-
-/* iPhone screen */
-.iphone-screen {
-  position: relative;
-  width: 86%;
-  height: 92%;
-  background: #000;
-  border-radius: 40px;
-  overflow: hidden;
-  z-index: 2;
   display: flex;
   flex-direction: column;
-}
-
-/* iPhone notch */
-.iphone-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 35px;
-  background: #000;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-  z-index: 10;
-}
-
-/* Speaker in notch */
-.iphone-notch:before {
-  content: '';
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 6px;
-  background: #1a1a1a;
-  border-radius: 3px;
-}
-
-/* Camera in notch */
-.iphone-notch:after {
-  content: '';
-  position: absolute;
-  top: 8px;
-  right: 25%;
-  width: 10px;
-  height: 10px;
-  background: #1a1a1a;
-  border-radius: 50%;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.8);
-}
-
-/* Status bar */
-.status-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px;
-  z-index: 5;
-}
-
-/* Time in status bar */
-.status-time {
-  position: absolute;
-  width: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: -0.5px;
-  z-index: 11;
-}
-
-/* Status icons container */
-.status-icons {
-  position: absolute;
-  right: 15px;
-  top: 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-/* Signal bars */
-.icon.signal {
-  display: flex;
-  align-items: flex-end;
-  height: 12px;
-  gap: 1px;
-}
-
-.icon.signal .bar-1,
-.icon.signal .bar-2,
-.icon.signal .bar-3,
-.icon.signal .bar-4 {
-  width: 3px;
-  background: white;
-  border-radius: 1px;
-}
-
-.icon.signal .bar-1 {
-  height: 5px;
-}
-
-.icon.signal .bar-2 {
-  height: 7px;
-}
-
-.icon.signal .bar-3 {
-  height: 9px;
-}
-
-.icon.signal .bar-4 {
-  height: 12px;
-}
-
-/* WiFi icon */
-.icon.wifi {
-  position: relative;
-  width: 16px;
-  height: 12px;
-}
-
-.icon.wifi:before {
-  content: '';
-  position: absolute;
-  border: 1.5px solid white;
-  border-bottom: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 8px 8px 0 0;
-  transform: rotate(45deg) translate(1px, -10px);
-}
-
-.icon.wifi:after {
-  content: '';
-  position: absolute;
-  border: 1.5px solid white;
-  border-bottom: none;
-  width: 8px;
-  height: 8px;
-  border-radius: 4px 4px 0 0;
-  transform: rotate(45deg) translate(1px, -5px);
-}
-
-/* Battery icon */
-.icon.battery {
-  position: relative;
-  width: 24px;
-  height: 12px;
-  border: 1px solid white;
-  border-radius: 3px;
-  padding: 1px;
-}
-
-.icon.battery:before {
-  content: '';
-  position: absolute;
-  right: -4px;
-  top: 3px;
-  width: 2px;
-  height: 6px;
-  background: white;
-  border-radius: 0 2px 2px 0;
-}
-
-.icon.battery:after {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  width: 18px;
-  height: 6px;
-  background: white;
-  border-radius: 1px;
-}
-
-/* App content area */
-.iphone-content {
-  flex: 1;
-  padding: 15px;
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   background-color: #0a0a0a;
-  overflow-y: auto;
-  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* App header */
@@ -330,17 +56,14 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Home indicator */
-.iphone-home-indicator {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 5px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 3px;
-  z-index: 10;
+/* App body content */
+.app-body {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
 }
 
 /* Fitness chart */
@@ -433,7 +156,7 @@
 @media screen and (max-width: 768px) {
   .swiper-slide {
     width: 320px !important;
-    height: 650px;
+    height: 550px;
   }
 }
 

@@ -322,191 +322,163 @@ const IronLogProject = () => {
               >
                 {appScreenshots.map((screen) => (
                   <SwiperSlide key={screen.id}>
-                    <div className="iphone-mockup">
-                      <div className="iphone-frame">
-                        {/* Side buttons */}
-                        <div className="iphone-buttons"></div>
-                        <div className="power-button"></div>
-                        
-                        <div className="iphone-screen">
-                          {/* iPhone notch and status bar */}
-                          <div className="iphone-notch"></div>
-                          
-                          <div className="status-bar">
-                            <div className="status-time">{currentTime}</div>
-                            <div className="status-icons">
-                              <div className="icon signal">
-                                <div className="bar-1"></div>
-                                <div className="bar-2"></div>
-                                <div className="bar-3"></div>
-                                <div className="bar-4"></div>
-                              </div>
-                              <div className="icon wifi"></div>
-                              <div className="icon battery"></div>
+                    <div className="app-content">
+                      {/* Header */}
+                      <div className="app-header" style={{
+                        background: `linear-gradient(to right, ${screen.color}CC, ${screen.color}99)`
+                      }}>
+                        <div className="h-6 w-32 bg-white/20 rounded-md"></div>
+                        <div className="ml-auto h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
+                          <FiUser className="text-white/80" size={14} />
+                        </div>
+                      </div>
+
+                      {/* Content based on screen type */}
+                      <div className="app-body">
+                        <div className="h-8 w-48 bg-white/10 rounded-md mb-4 flex items-center pl-3">
+                          <span className="text-white/80 text-sm font-medium">{screen.caption}</span>
+                        </div>
+
+                        {/* Different content for each screen */}
+                        {screen.alt === "Workout Planner" && (
+                          <>
+                            <div className="workout-list">
+                              {Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="workout-item flex items-center">
+                                  <div className="w-10 h-10 rounded-full bg-blue-600/30 flex items-center justify-center mr-3">
+                                    <FiActivity className="text-white" size={18} />
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="h-4 w-24 bg-white/20 rounded-md mb-2"></div>
+                                    <div className="h-3 w-16 bg-white/10 rounded-md"></div>
+                                  </div>
+                                  <div className="h-6 w-12 bg-blue-600/30 rounded-md"></div>
+                                </div>
+                              ))}
                             </div>
-                          </div>
-
-                          {/* App Header */}
-                          <div className="app-header" style={{
-                            background: `linear-gradient(to right, ${screen.color}CC, ${screen.color}99)`
-                          }}>
-                            <div className="h-6 w-32 bg-white/20 rounded-md"></div>
-                            <div className="ml-auto h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
-                              <FiUser className="text-white/80" size={14} />
+                            <div className="mt-auto h-12 bg-blue-600/20 rounded-md flex items-center justify-center">
+                              <div className="h-4 w-24 bg-white/20 rounded-md"></div>
                             </div>
-                          </div>
+                          </>
+                        )}
 
-                          {/* Content based on screen type */}
-                          <div className="iphone-content">
-                            <div className="h-8 w-48 bg-white/10 rounded-md mb-2 flex items-center pl-3">
-                              <span className="text-white/80 text-xs font-medium">{screen.caption}</span>
-                            </div>
-
-                            {/* Different content for each screen */}
-                            {screen.alt === "Workout Planner" && (
-                              <>
-                                <div className="workout-list">
-                                  {Array.from({ length: 4 }).map((_, i) => (
-                                    <div key={i} className="workout-item flex items-center">
-                                      <div className="w-10 h-10 rounded-full bg-blue-600/30 flex items-center justify-center mr-3">
-                                        <FiActivity className="text-white" size={18} />
-                                      </div>
-                                      <div className="flex-1">
-                                        <div className="h-4 w-24 bg-white/20 rounded-md mb-2"></div>
-                                        <div className="h-3 w-16 bg-white/10 rounded-md"></div>
-                                      </div>
-                                      <div className="h-6 w-12 bg-blue-600/30 rounded-md"></div>
-                                    </div>
-                                  ))}
-                                </div>
-                                <div className="mt-auto h-12 bg-blue-600/20 rounded-md flex items-center justify-center">
-                                  <div className="h-4 w-24 bg-white/20 rounded-md"></div>
-                                </div>
-                              </>
-                            )}
-
-                            {screen.alt === "Progress Tracking" && (
-                              <>
-                                <div className="fitness-chart">
-                                  <div className="chart-bars">
-                                    {chartBarHeights.map((height, i) => (
-                                      <div 
-                                        key={i} 
-                                        className="chart-bar" 
-                                        style={{
-                                          height: `${height}%`,
-                                          background: `linear-gradient(to top, ${screen.color}BB, ${screen.color}66)`
-                                        }}
-                                      ></div>
-                                    ))}
-                                  </div>
-                                </div>
-                                <div className="data-grid">
-                                  <div className="data-card">
-                                    <div className="data-title">Weight</div>
-                                    <div className="data-value">172 lbs</div>
-                                  </div>
-                                  <div className="data-card">
-                                    <div className="data-title">Strength</div>
-                                    <div className="data-value">+12%</div>
-                                  </div>
-                                  <div className="data-card">
-                                    <div className="data-title">Workouts</div>
-                                    <div className="data-value">48</div>
-                                  </div>
-                                  <div className="data-card">
-                                    <div className="data-title">Streak</div>
-                                    <div className="data-value">16 days</div>
-                                  </div>
-                                </div>
-                              </>
-                            )}
-
-                            {screen.alt === "AI Chat" && (
-                              <div className="flex-1 flex flex-col">
-                                <div className="flex-1 p-2 space-y-3 overflow-hidden relative">
-                                  <div className="flex justify-start">
-                                    <div className="max-w-[75%] bg-gray-800 p-3 rounded-lg rounded-tl-none">
-                                      <div className="h-3 w-32 bg-white/20 rounded-md mb-1"></div>
-                                      <div className="h-3 w-40 bg-white/20 rounded-md"></div>
-                                    </div>
-                                  </div>
-                                  <div className="flex justify-end">
-                                    <div className="max-w-[75%] bg-blue-600/30 p-3 rounded-lg rounded-tr-none">
-                                      <div className="h-3 w-28 bg-white/20 rounded-md mb-1"></div>
-                                      <div className="h-3 w-36 bg-white/20 rounded-md"></div>
-                                    </div>
-                                  </div>
-                                  <div className="flex justify-start">
-                                    <div className="max-w-[75%] bg-gray-800 p-3 rounded-lg rounded-tl-none">
-                                      <div className="h-3 w-40 bg-white/20 rounded-md mb-1"></div>
-                                      <div className="h-3 w-32 bg-white/20 rounded-md mb-1"></div>
-                                      <div className="h-3 w-28 bg-white/20 rounded-md"></div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="h-12 p-2 flex items-center gap-2">
-                                  <div className="flex-1 h-8 bg-gray-800 rounded-full"></div>
-                                  <div className="w-8 h-8 rounded-full bg-blue-600/30 flex items-center justify-center">
-                                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-
-                            {(screen.alt === "Goals Tracking" || screen.alt === "Goals History") && (
-                              <div className="flex-1 space-y-4">
-                                {Array.from({ length: 3 }).map((_, i) => (
-                                  <div key={i} className="bg-gray-800/50 p-3 rounded-lg border border-white/10">
-                                    <div className="flex justify-between items-center mb-2">
-                                      <div className="h-4 w-32 bg-white/20 rounded-md"></div>
-                                      <div className="h-6 w-16 rounded-full bg-blue-600/30 flex items-center justify-center">
-                                        <div className="h-2 w-8 bg-white/30 rounded-full"></div>
-                                      </div>
-                                    </div>
-                                    <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                      <div className="h-full bg-blue-500" style={{ width: `${(i + 1) * 25}%` }}></div>
-                                    </div>
-                                    <div className="flex justify-between mt-2">
-                                      <div className="h-3 w-10 bg-white/10 rounded-md"></div>
-                                      <div className="h-3 w-10 bg-white/10 rounded-md"></div>
-                                    </div>
-                                  </div>
+                        {screen.alt === "Progress Tracking" && (
+                          <>
+                            <div className="fitness-chart">
+                              <div className="chart-bars">
+                                {chartBarHeights.map((height, i) => (
+                                  <div 
+                                    key={i} 
+                                    className="chart-bar" 
+                                    style={{
+                                      height: `${height}%`,
+                                      background: `linear-gradient(to top, ${screen.color}BB, ${screen.color}66)`
+                                    }}
+                                  ></div>
                                 ))}
                               </div>
-                            )}
+                            </div>
+                            <div className="data-grid">
+                              <div className="data-card">
+                                <div className="data-title">Weight</div>
+                                <div className="data-value">172 lbs</div>
+                              </div>
+                              <div className="data-card">
+                                <div className="data-title">Strength</div>
+                                <div className="data-value">+12%</div>
+                              </div>
+                              <div className="data-card">
+                                <div className="data-title">Workouts</div>
+                                <div className="data-value">48</div>
+                              </div>
+                              <div className="data-card">
+                                <div className="data-title">Streak</div>
+                                <div className="data-value">16 days</div>
+                              </div>
+                            </div>
+                          </>
+                        )}
 
-                            {screen.alt === "Profile Settings" && (
-                              <div className="flex-1 space-y-4">
-                                <div className="flex justify-center py-4">
-                                  <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center border-2 border-blue-500/50">
-                                    <FiUser size={30} className="text-white/70" />
-                                  </div>
-                                </div>
-                                <div className="h-6 w-32 mx-auto bg-white/10 rounded-md"></div>
-                                <div className="space-y-3 mt-4">
-                                  {Array.from({ length: 4 }).map((_, i) => (
-                                    <div key={i} className="flex items-center p-3 bg-gray-800/50 rounded-lg">
-                                      <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-3">
-                                        {i === 0 && <FiUser size={16} className="text-white/70" />}
-                                        {i === 1 && <FiHeart size={16} className="text-white/70" />}
-                                        {i === 2 && <FiSettings size={16} className="text-white/70" />}
-                                        {i === 3 && <FiCalendar size={16} className="text-white/70" />}
-                                      </div>
-                                      <div className="flex-1">
-                                        <div className="h-4 w-24 bg-white/20 rounded-md"></div>
-                                      </div>
-                                      <div className="h-4 w-4 rounded-full border border-white/30"></div>
-                                    </div>
-                                  ))}
+                        {screen.alt === "AI Chat" && (
+                          <div className="flex-1 flex flex-col">
+                            <div className="flex-1 p-2 space-y-3 overflow-hidden relative">
+                              <div className="flex justify-start">
+                                <div className="max-w-[75%] bg-gray-800 p-3 rounded-lg rounded-tl-none">
+                                  <div className="h-3 w-32 bg-white/20 rounded-md mb-1"></div>
+                                  <div className="h-3 w-40 bg-white/20 rounded-md"></div>
                                 </div>
                               </div>
-                            )}
-
-                            {/* Home indicator */}
-                            <div className="iphone-home-indicator"></div>
+                              <div className="flex justify-end">
+                                <div className="max-w-[75%] bg-blue-600/30 p-3 rounded-lg rounded-tr-none">
+                                  <div className="h-3 w-28 bg-white/20 rounded-md mb-1"></div>
+                                  <div className="h-3 w-36 bg-white/20 rounded-md"></div>
+                                </div>
+                              </div>
+                              <div className="flex justify-start">
+                                <div className="max-w-[75%] bg-gray-800 p-3 rounded-lg rounded-tl-none">
+                                  <div className="h-3 w-40 bg-white/20 rounded-md mb-1"></div>
+                                  <div className="h-3 w-32 bg-white/20 rounded-md mb-1"></div>
+                                  <div className="h-3 w-28 bg-white/20 rounded-md"></div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="h-12 p-2 flex items-center gap-2">
+                              <div className="flex-1 h-8 bg-gray-800 rounded-full"></div>
+                              <div className="w-8 h-8 rounded-full bg-blue-600/30 flex items-center justify-center">
+                                <div className="w-3 h-3 bg-white rounded-full"></div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        )}
+
+                        {(screen.alt === "Goals Tracking" || screen.alt === "Goals History") && (
+                          <div className="flex-1 space-y-4">
+                            {Array.from({ length: 3 }).map((_, i) => (
+                              <div key={i} className="bg-gray-800/50 p-3 rounded-lg border border-white/10">
+                                <div className="flex justify-between items-center mb-2">
+                                  <div className="h-4 w-32 bg-white/20 rounded-md"></div>
+                                  <div className="h-6 w-16 rounded-full bg-blue-600/30 flex items-center justify-center">
+                                    <div className="h-2 w-8 bg-white/30 rounded-full"></div>
+                                  </div>
+                                </div>
+                                <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
+                                  <div className="h-full bg-blue-500" style={{ width: `${(i + 1) * 25}%` }}></div>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                  <div className="h-3 w-10 bg-white/10 rounded-md"></div>
+                                  <div className="h-3 w-10 bg-white/10 rounded-md"></div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {screen.alt === "Profile Settings" && (
+                          <div className="flex-1 space-y-4">
+                            <div className="flex justify-center py-4">
+                              <div className="w-20 h-20 rounded-full bg-gray-800 flex items-center justify-center border-2 border-blue-500/50">
+                                <FiUser size={30} className="text-white/70" />
+                              </div>
+                            </div>
+                            <div className="h-6 w-32 mx-auto bg-white/10 rounded-md"></div>
+                            <div className="space-y-3 mt-4">
+                              {Array.from({ length: 4 }).map((_, i) => (
+                                <div key={i} className="flex items-center p-3 bg-gray-800/50 rounded-lg">
+                                  <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-3">
+                                    {i === 0 && <FiUser size={16} className="text-white/70" />}
+                                    {i === 1 && <FiHeart size={16} className="text-white/70" />}
+                                    {i === 2 && <FiSettings size={16} className="text-white/70" />}
+                                    {i === 3 && <FiCalendar size={16} className="text-white/70" />}
+                                  </div>
+                                  <div className="flex-1">
+                                    <div className="h-4 w-24 bg-white/20 rounded-md"></div>
+                                  </div>
+                                  <div className="h-4 w-4 rounded-full border border-white/30"></div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </SwiperSlide>
