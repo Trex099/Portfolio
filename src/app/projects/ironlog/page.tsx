@@ -325,12 +325,9 @@ const IronLogProject = () => {
                     <div className="iphone-mockup iphone15">
                       {/* iPhone hardware elements */}
                       <div className="power-button"></div>
-                      <div className="action-button"></div>
                       
-                      {/* Dynamic Island */}
-                      <div className="dynamic-island">
-                        <div className="dynamic-island-camera"></div>
-                      </div>
+                      {/* iPhone Notch instead of Dynamic Island */}
+                      <div className="iphone-notch"></div>
                       
                       <div className="iphone-screen">
                         {/* Status Bar */}
