@@ -53,6 +53,9 @@ const appScreenshots = [
   },
 ];
 
+// Chart bar heights - deterministic based on day of week
+const chartBarHeights = [65, 45, 70, 55, 80, 60, 75]; 
+
 // Define screen types for type safety
 type ScreenType = 
   | "Workout Planner"
@@ -102,8 +105,12 @@ const featuresByScreen: Record<ScreenType, string[]> = {
   ]
 };
 
-// Get current time for iPhone mockup
+// Client-side function to get current time
 const getCurrentTime = () => {
+  if (typeof window === 'undefined') {
+    return '9:41'; // Default iOS screenshot time
+  }
+  
   const now = new Date();
   let hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -113,14 +120,24 @@ const getCurrentTime = () => {
   return hours + ':' + minutes + ampm;
 };
 
+// Default time for server-side rendering
+const defaultTime = '9:41'; // Classic Apple demo time
+
 const IronLogProject = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentTime, setCurrentTime] = useState(getCurrentTime());
+  const [currentTime, setCurrentTime] = useState(defaultTime);
+  const [isClient, setIsClient] = useState(false);
   const prevButtonRef = useRef<HTMLButtonElement>(null);
   const nextButtonRef = useRef<HTMLButtonElement>(null);
   const featureListRef = useRef<HTMLUListElement>(null);
+  
+  // Set client-side state once component mounts
+  useEffect(() => {
+    setIsClient(true);
+    setCurrentTime(getCurrentTime());
+  }, []);
   
   // Function to handle navigation and scrolling
   const handleBackToProjects = () => {
@@ -226,11 +243,6 @@ const IronLogProject = () => {
     };
   }, [activeIndex, activeScreen]);
 
-  // Function to generate random number for chart bars
-  const getRandomHeight = () => {
-    return 20 + Math.floor(Math.random() * 80);
-  };
-
   return (
     <div ref={pageRef} className="min-h-screen w-full bg-gray-900 text-white">
       <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-blue-900/30 to-transparent"></div>
@@ -314,17 +326,21 @@ const IronLogProject = () => {
                       {/* iPhone hardware elements */}
                       <div className="power-button"></div>
                       <div className="action-button"></div>
-                      <div className="camera-dot"></div>
                       
                       {/* Dynamic Island */}
-                      <div className="dynamic-island"></div>
+                      <div className="dynamic-island">
+                        <div className="dynamic-island-camera"></div>
+                      </div>
                       
                       <div className="iphone-screen">
                         {/* Status Bar */}
                         <div className="status-bar">
                           <div className="status-time">{currentTime}</div>
                           <div className="status-icons">
-                            <div className="icon signal"></div>
+                            <div className="icon signal">
+                              <div className="bar-1"></div>
+                              <div className="bar-2"></div>
+                            </div>
                             <div className="icon wifi"></div>
                             <div className="icon battery"></div>
                           </div>
@@ -373,11 +389,15 @@ const IronLogProject = () => {
                             <>
                               <div className="fitness-chart">
                                 <div className="chart-bars">
-                                  {Array.from({ length: 7 }).map((_, i) => (
-                                    <div key={i} className="chart-bar" style={{
-                                      height: `${getRandomHeight()}%`,
-                                      background: `linear-gradient(to top, ${screen.color}BB, ${screen.color}66)`
-                                    }}></div>
+                                  {chartBarHeights.map((height, i) => (
+                                    <div 
+                                      key={i} 
+                                      className="chart-bar" 
+                                      style={{
+                                        height: `${height}%`,
+                                        background: `linear-gradient(to top, ${screen.color}BB, ${screen.color}66)`
+                                      }}
+                                    ></div>
                                   ))}
                                 </div>
                               </div>
@@ -445,7 +465,7 @@ const IronLogProject = () => {
                                     </div>
                                   </div>
                                   <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                    <div className="h-full bg-blue-500" style={{ width: `${Math.random() * 100}%` }}></div>
+                                    <div className="h-full bg-blue-500" style={{ width: `${(i + 1) * 25}%` }}></div>
                                   </div>
                                   <div className="flex justify-between mt-2">
                                     <div className="h-3 w-10 bg-white/10 rounded-md"></div>
