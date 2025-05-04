@@ -262,9 +262,9 @@ const IronLogProject = () => {
           </a>
           
           <div className="flex flex-col items-end gap-2">
-            <div className="flex items-center bg-yellow-500/30 backdrop-blur-sm px-4 py-2 rounded-full border border-yellow-400/20">
-              <div className="w-3 h-3 rounded-full bg-yellow-400 mr-2"></div>
-              <span className="text-yellow-300 text-sm font-medium">Page in construction</span>
+            <div className="flex items-center bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+              <div className="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+              <span className="text-green-400 text-sm font-medium">Complete</span>
             </div>
             <a 
               href="https://github.com/Trex099/IronLog" 
@@ -275,6 +275,14 @@ const IronLogProject = () => {
               <FiGithub className="mr-2 text-white/80" size={16} />
               <span className="text-white/80 text-sm font-medium">GitHub</span>
             </a>
+          </div>
+        </div>
+        
+        {/* Page in construction status */}
+        <div className="w-full flex justify-center mb-8 -mt-4">
+          <div className="flex items-center bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
+            <div className="w-3 h-3 rounded-full bg-yellow-500 mr-2"></div>
+            <span className="text-yellow-400 text-sm font-medium">Page in construction</span>
           </div>
         </div>
         
