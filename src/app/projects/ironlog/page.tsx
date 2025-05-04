@@ -340,6 +340,8 @@ const IronLogProject = () => {
                             <div className="icon signal">
                               <div className="bar-1"></div>
                               <div className="bar-2"></div>
+                              <div className="bar-3"></div>
+                              <div className="bar-4"></div>
                             </div>
                             <div className="icon wifi"></div>
                             <div className="icon battery"></div>
